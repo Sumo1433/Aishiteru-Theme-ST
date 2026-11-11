@@ -1,0 +1,131 @@
+/* Paint only: preserve MovingUI geometry. */
+body.ds-theme-active {
+ --ds-grain:url('assets/ornaments/ds-grain.webp');
+ --ds-clock:url('assets/ornaments/ds-divider-shadow.webp');
+ --ds-corner:none;
+ --ds-frost:url('assets/ornaments/ds-ornament-frost.webp');
+ --ds-seal:url('assets/ornaments/ds-seal.webp');
+ --ds-panel-tl:url('assets/frames/ds-chat-tl.webp');
+ --ds-panel-tr:url('assets/frames/ds-chat-tr.webp');
+ --ds-panel-bl:url('assets/frames/ds-chat-bl.webp');
+ --ds-panel-br:url('assets/frames/ds-chat-br.webp');
+}
+
+
+/* Satella's shadow hands wrap the rim; the face stays unobstructed at the centre. */
+body.ds-theme-active #chat .mes .avatar { position:relative; background:#100c1a; border-color:var(--ds-border); outline:none; box-shadow:none; }
+body.ds-theme-active #chat .mes .avatar::after { content:''; position:absolute; inset:-7px; background:url('assets/ornaments/ds-avatar-satella.webp') center / contain no-repeat; pointer-events:none; -webkit-mask:linear-gradient(#000 0 0) center / 100% 100% no-repeat,linear-gradient(#000 0 0) center / 74% 74% no-repeat; -webkit-mask-composite:xor; mask:linear-gradient(#000 0 0) center / 100% 100% no-repeat,linear-gradient(#000 0 0) center / 74% 74% no-repeat; mask-composite:exclude; }
+body.ds-theme-active #chat .mes[is_user="true"] .avatar { border-color:var(--ds-ice); }
+
+/* ImageGen nine-slice painting: only edge strips stretch, never corner hands. */
+body.ds-theme-active #chat .mes {
+ background-image:url('assets/frames/ds-chat-tl.webp'),url('assets/frames/ds-chat-tr.webp'),url('assets/frames/ds-chat-bl.webp'),url('assets/frames/ds-chat-br.webp'),url('assets/frames/ds-chat-top.webp'),url('assets/frames/ds-chat-bottom.webp'),url('assets/frames/ds-chat-left.webp'),url('assets/frames/ds-chat-right.webp');
+ background-position:0 0,right top,left bottom,right bottom,center top 6px,center bottom 6px,left 6px center,right 6px center;
+ background-size:var(--ds-corner-size) var(--ds-corner-size),var(--ds-corner-size) var(--ds-corner-size),var(--ds-corner-size) var(--ds-corner-size),var(--ds-corner-size) var(--ds-corner-size),calc(100% - 2 * var(--ds-corner-size)) 8px,calc(100% - 2 * var(--ds-corner-size)) 8px,8px calc(100% - 2 * var(--ds-corner-size)),8px calc(100% - 2 * var(--ds-corner-size));
+ background-repeat:no-repeat;
+}
+
+body.ds-theme-active #chat .mes.last_mes:not([is_user="true"]),body.ds-theme-active.swipeAllMessages #chat .mes:not([is_user="true"]) { background-image:url('assets/frames/ds-chat-tl.webp'),url('assets/frames/ds-chat-tr.webp'),url('assets/frames/ds-chat-bl.webp'),none,url('assets/frames/ds-chat-top.webp'),url('assets/frames/ds-chat-bottom.webp'),url('assets/frames/ds-chat-left.webp'),url('assets/frames/ds-chat-right.webp'); }
+body.ds-theme-active.documentstyle #chat .mes,body.ds-theme-active #chat .mes:is([is_system="true"],.smallSysMes) { background-image:none; }
+body.ds-theme-active .drawer-content,body.ds-theme-active dialog.popup {
+ background-image:var(--ds-panel-tl),var(--ds-panel-tr),var(--ds-panel-bl),var(--ds-panel-br),var(--ds-corner),var(--ds-grain);
+ background-position:4px 4px,right 4px top 4px,left 4px bottom 4px,right 4px bottom 4px,8px 8px,0 0;
+ background-size:var(--ds-corner-size-panel) var(--ds-corner-size-panel),var(--ds-corner-size-panel) var(--ds-corner-size-panel),var(--ds-corner-size-panel) var(--ds-corner-size-panel),var(--ds-corner-size-panel) var(--ds-corner-size-panel),100px 58px,auto;
+ background-repeat:no-repeat,no-repeat,no-repeat,no-repeat,no-repeat,repeat;
+}
+body.ds-theme-active dialog.popup {
+ --ds-panel-tl:url('assets/frames/ds-chat-tl.webp');
+ --ds-panel-tr:url('assets/frames/ds-chat-tr.webp');
+ --ds-panel-bl:url('assets/frames/ds-chat-bl.webp');
+ --ds-panel-br:url('assets/frames/ds-chat-br.webp');
+}
+/* Only explicitly marked destructive dialogs: ST does not consistently mark its delete confirmations. */
+body.ds-theme-active dialog.popup:has(.popup-controls > .popup-button-ok.redWarningBG) {
+ --ds-panel-tl:url('assets/frames/ds-chat-tl.webp');
+ --ds-panel-tr:url('assets/frames/ds-chat-tr.webp');
+ --ds-panel-bl:url('assets/frames/ds-chat-bl.webp');
+ --ds-panel-br:url('assets/frames/ds-chat-br.webp');
+}
+body.ds-theme-active dialog.popup.transparent_dialogue_popup { background-image:none; }
+body.ds-theme-active .popup .popup-header { background-image:url('assets/ornaments/ds-seal.webp'); border-bottom:1px solid var(--ds-gold-line); padding-bottom:16px; margin-bottom:16px; }
+body.ds-theme-active #chat .mes .mes_text hr { background-image:url('assets/ornaments/ds-divider-shadow.webp'); }
+body.ds-theme-active #send_form { background-image:url('assets/frames/ds-chat-tl.webp'),url('assets/frames/ds-chat-tr.webp'),var(--ds-grain); background-position:5px 5px,right 5px top 5px,0 0; background-size:20px 20px,20px 20px,auto; background-repeat:no-repeat,no-repeat,repeat; }
+body.ds-theme-active #send_form.no-connection { background-image:var(--ds-grain); }
+body.ds-theme-active #send_form::after { background-image:url('assets/ornaments/ds-ornament-frost.webp'); }
+body.ds-theme-active #top-bar { background-image:linear-gradient(90deg,transparent,var(--ds-gold-line),transparent),var(--ds-grain); background-position:bottom,0 0; background-size:100% 1px,auto; background-repeat:no-repeat,repeat; }
+/* The native hosts are enumerated in icons.css; extensions' drawer icons are excluded. */
+body.ds-theme-active #top-settings-holder :is(#leftNavDrawerIcon,#API-status-top.fa-plug,#API-status-top.fa-plug-circle-exclamation,#advanced-formatting-button .drawer-icon,#WIDrawerIcon,#user-settings-button .drawer-icon,#backgrounds-button .drawer-icon,#extensions-settings-button .drawer-icon,#persona-management-button .drawer-icon,#rightNavDrawerIcon) { position:relative; }
+body.ds-theme-active #top-settings-holder :is(#leftNavDrawerIcon,#API-status-top.fa-plug,#API-status-top.fa-plug-circle-exclamation,#advanced-formatting-button .drawer-icon,#WIDrawerIcon,#user-settings-button .drawer-icon,#backgrounds-button .drawer-icon,#extensions-settings-button .drawer-icon,#persona-management-button .drawer-icon,#rightNavDrawerIcon).openIcon::after { content:''; position:absolute; width:10px; height:2px; left:calc(50% - 5px); bottom:1px; background:var(--ds-gold); pointer-events:none; }
+body.ds-theme-active #top-settings-holder :is(#leftNavDrawerIcon,#API-status-top.fa-plug,#API-status-top.fa-plug-circle-exclamation,#advanced-formatting-button .drawer-icon,#WIDrawerIcon,#user-settings-button .drawer-icon,#backgrounds-button .drawer-icon,#extensions-settings-button .drawer-icon,#persona-management-button .drawer-icon,#rightNavDrawerIcon).openIcon { box-shadow:var(--ds-glow-gold); }
+body.ds-theme-active.noShadows #top-settings-holder :is(#leftNavDrawerIcon,#API-status-top.fa-plug,#API-status-top.fa-plug-circle-exclamation,#advanced-formatting-button .drawer-icon,#WIDrawerIcon,#user-settings-button .drawer-icon,#backgrounds-button .drawer-icon,#extensions-settings-button .drawer-icon,#persona-management-button .drawer-icon,#rightNavDrawerIcon).openIcon { box-shadow:none; filter:none; }
+/* Generation hand ornament: desktop with a mouse only. (Its phone 'off' rule below lost on specificity,
+   so the hand was painted on phones as soon as a swipe started a generation.) */
+@media (min-width:1001px) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+body.ds-theme-active[data-generating="true"] #chat .mes.last_mes:not([is_user="true"]) > .mesAvatarWrapper::after { content:''; position:absolute; left:6px; bottom:6px; width:120px; height:60px; background:url('assets/ornaments/ds-ornament-shadow-hand.webp') left bottom / contain no-repeat; opacity:.35; pointer-events:none; }
+}
+@media (max-width:1000px) { body.ds-theme-active { --ds-corner-size-panel:32px; --ds-corner-size:20px; } }
+@media (max-width:768px) {
+ 
+ body.ds-theme-active.documentstyle #chat .mes,body.ds-theme-active #chat .mes:is([is_system="true"],.smallSysMes) { background-image:none; }
+ body.ds-theme-active #send_form { background-image:var(--ds-grain); }
+}
+@media (max-width:450px) { body.ds-theme-active { --ds-corner-size-panel:24px; } body.ds-theme-active { --ds-corner-size:22px; } }
+@media (max-width:1000px),(pointer:coarse),(prefers-reduced-motion:reduce) { body.ds-theme-active[data-generating="true"] #chat .mes.last_mes > .mesAvatarWrapper::after { content:none; } }
+body.ds-theme-active.reduced-motion[data-generating="true"] #chat .mes.last_mes > .mesAvatarWrapper::after { content:none; }
+body.ds-theme-active #top-settings-holder :is(#leftNavDrawerIcon,#API-status-top,#WIDrawerIcon,#rightNavDrawerIcon,#advanced-formatting-button .drawer-icon,#user-settings-button .drawer-icon,#backgrounds-button .drawer-icon,#extensions-settings-button .drawer-icon,#persona-management-button .drawer-icon).openIcon:hover { color:var(--ds-gold-hi); }
+/* Visible Gospel fittings. Reserve the complete corner square for art so even
+   a closed title and the open action row stay clear of the clasps. */
+body.ds-theme-active #chat .mes .mes_reasoning_details {
+ --ds-reasoning-corner:36px;
+ border-color:transparent;
+ background-image:url('assets/frames/ds-reasoning-tl.webp'),url('assets/frames/ds-reasoning-tr.webp'),url('assets/frames/ds-reasoning-bl.webp'),url('assets/frames/ds-reasoning-br.webp'),url('assets/frames/ds-reasoning-top.webp'),url('assets/frames/ds-reasoning-bottom.webp'),url('assets/frames/ds-reasoning-left.webp'),url('assets/frames/ds-reasoning-right.webp'),linear-gradient(180deg,rgba(36,24,46,.92),rgba(20,15,30,.92));
+ background-position:left top,right top,left bottom,right bottom,center top,center bottom,left center,right center,center;
+ background-size:var(--ds-reasoning-corner) var(--ds-reasoning-corner),var(--ds-reasoning-corner) var(--ds-reasoning-corner),var(--ds-reasoning-corner) var(--ds-reasoning-corner),var(--ds-reasoning-corner) var(--ds-reasoning-corner),calc(100% - 2 * var(--ds-reasoning-corner)) 7px,calc(100% - 2 * var(--ds-reasoning-corner)) 7px,7px calc(100% - 2 * var(--ds-reasoning-corner)),7px calc(100% - 2 * var(--ds-reasoning-corner)),100% 100%;
+ background-repeat:no-repeat;
+}
+body.ds-theme-active #chat .mes .mes_reasoning_header { padding:14px calc(var(--ds-reasoning-corner) + 6px); min-height:56px; }
+body.ds-theme-active #chat .mes .mes_reasoning_actions { padding:0 calc(var(--ds-reasoning-corner) + 6px) 12px; }
+body.ds-theme-active #chat .mes .mes_reasoning { padding-inline:calc(var(--ds-reasoning-corner) + 6px); padding-bottom:calc(var(--ds-reasoning-corner) + 6px); }
+body.ds-theme-active .welcomeRecent .recentChatList .recentChat {
+ --ds-recent-corner:28px;
+ padding:16px calc(var(--ds-recent-corner) + 6px);
+ background-image:url('assets/frames/ds-recent-tl.webp'),url('assets/frames/ds-recent-tr.webp'),url('assets/frames/ds-recent-bl.webp'),url('assets/frames/ds-recent-br.webp'),url('assets/frames/ds-recent-top.webp'),url('assets/frames/ds-recent-bottom.webp'),url('assets/frames/ds-recent-left.webp'),url('assets/frames/ds-recent-right.webp');
+ background-position:left top,right top,left bottom,right bottom,center top,center bottom,left center,right center;
+ background-size:var(--ds-recent-corner) var(--ds-recent-corner),var(--ds-recent-corner) var(--ds-recent-corner),var(--ds-recent-corner) var(--ds-recent-corner),var(--ds-recent-corner) var(--ds-recent-corner),calc(100% - 2 * var(--ds-recent-corner)) 5px,calc(100% - 2 * var(--ds-recent-corner)) 5px,5px calc(100% - 2 * var(--ds-recent-corner)),5px calc(100% - 2 * var(--ds-recent-corner));
+ background-repeat:no-repeat;
+}
+@media(max-width:768px) {
+ body.ds-theme-active #chat .mes .mes_reasoning_details { --ds-reasoning-corner:26px; }
+ body.ds-theme-active .welcomeRecent .recentChatList .recentChat { --ds-recent-corner:22px; }
+}
+body.ds-theme-active #chat .mes .mes_reasoning_details[open] .mes_reasoning_summary {
+ background:url('assets/ornaments/ds-reasoning-divider.webp') center bottom / min(76%,360px) 10px no-repeat;
+}
+/* No solid backing: the generated dial has its own black face behind the N/M glyphs (contrast measured in test-v2-round2). */
+/* No colour transition: the digits must vanish and return at once around the 500ms needle turn
+   (ST's ~0.6s transition left them half-visible for the whole turn). */
+body.ds-theme-active #chat .mes .swipes-counter { isolation:isolate; color:#e6e1f0; background-color:transparent; transition:none; }
+body.ds-theme-active #chat .mes .swipes-counter::before {
+ border:0; mask:none; background:url('assets/ornaments/ds-swipe-dial.webp') center / contain no-repeat; z-index:-1;
+}
+body.ds-theme-active #chat .mes .swipes-counter::after {
+ background:url('assets/ornaments/ds-swipe-hand.webp') center / contain no-repeat; z-index:-1;
+ /* Keep the N/M glyphs clear while retaining the separately rotating needle. */
+ mask:radial-gradient(circle,transparent 45%,#000 48%);
+}
+/* Swipe: digits step aside for the synchronized 500ms turn. */
+@media(prefers-reduced-motion:no-preference) and (forced-colors:none) {
+body.ds-theme-active:not(.reduced-motion) #chat .mes.last_mes.ds-rewinding .swipes-counter { color:transparent; }
+body.ds-theme-active:not(.reduced-motion) #chat .mes.last_mes.ds-rewinding .swipes-counter::after { -webkit-mask:none; mask:none; filter:brightness(1.8) drop-shadow(0 0 2px rgba(205,185,255,.9)); }
+}
+@media (prefers-reduced-motion:reduce) { body.ds-theme-active #chat .mes.last_mes.ds-rewinding .swipes-counter { color:#e6e1f0; } }
+@media (forced-colors:active) {
+ body.ds-theme-active #top-settings-holder .openIcon::after { background:Highlight; forced-color-adjust:none; }
+ body.ds-theme-active :is(#chat .mes,#chat .mes .mes_reasoning_details,#chat .mes .mes_reasoning_summary,.welcomeRecent .recentChat,.drawer-content,dialog.popup,#send_form,#top-bar),body.ds-theme-active #chat .mes .mes_text hr,body.ds-theme-active .popup .popup-header { background-image:none !important; }
+ body.ds-theme-active #chat .mes .mes_reasoning_details { border-color:CanvasText; }
+ body.ds-theme-active #chat .mes .swipes-counter { color:CanvasText; background-color:Canvas; }
+ body.ds-theme-active #chat .mes .swipes-counter::before,body.ds-theme-active #chat .mes .swipes-counter::after { content:none; }
+ body.ds-theme-active[data-generating="true"] #chat .mes.last_mes > .mesAvatarWrapper::after { content:none; }
+ body.ds-theme-active #chat .mes .name_text,body.ds-theme-active #send_form::after,body.ds-theme-active #chat .swipes-counter::before { background-image:none !important; }
+ body.ds-theme-active #chat .mes .avatar::after { content:none; }
+}

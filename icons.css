@@ -1,0 +1,435 @@
+/* Explicit native ST glyph allow-list; third-party controls retain Font Awesome. */
+body.ds-theme-active :is(
+  #leftNavDrawerIcon,
+  #API-status-top.fa-plug,
+  #API-status-top.fa-plug-circle-exclamation,
+  #advanced-formatting-button .drawer-icon,
+  #WIDrawerIcon,
+  #user-settings-button .drawer-icon,
+  #backgrounds-button .drawer-icon,
+  #extensions-settings-button .drawer-icon,
+  #persona-management-button .drawer-icon,
+  #rightNavDrawerIcon,
+  #send_but,
+  #mes_continue,
+  #mes_impersonate,
+  #options_button,
+  #extensionsMenuButton,
+  #mes_stop > i,
+  .popup .popup-button-close,
+  #character_cross,
+  #chat .mes .mes_edit,
+  #chat .mes .mes_copy,
+  #chat .mes .extraMesButtonsHint,
+  #chat .mes .mes_bookmark,
+  #chat .mes .mes_hide,
+  #chat .mes .mes_unhide,
+  #chat .mes .mes_create_bookmark,
+  #chat .mes .mes_create_branch,
+  #chat .mes .mes_translate,
+  #chat .mes .mes_narrate,
+  #chat .mes .mes_embed,
+  #chat .mes .mes_prompt,
+  #chat .mes .swipe_left,
+  #chat .mes .swipe_right,
+  #chat .mes .mes_edit_done,
+  #chat .mes .mes_edit_cancel,
+  #chat .mes .mes_edit_delete,
+  #chat .mes .mes_edit_copy,
+  #chat .mes .mes_edit_up,
+  #chat .mes .mes_edit_down,
+  #chat .mes .mes_edit_add_reasoning,
+  #chat .mes .mes_reasoning_arrow,
+  #chat .mes .mes_reasoning_edit,
+  #chat .mes .mes_reasoning_copy,
+  #chat .mes .mes_reasoning_close_all,
+  #chat .mes .mes_reasoning_delete,
+  #chat .mes .mes_reasoning_edit_done,
+  #chat .mes .mes_reasoning_edit_cancel,
+  #chat .mes .mes_media_gallery,
+  #chat .mes .mes_media_list,
+  #chat .mes .sd_message_gen,
+  #chat .mes .mes_swipe_picker,
+  #chat .mes .mes_ghost,
+  #options #option_regenerate > i,
+  #options #option_continue > i,
+  #options #option_impersonate > i,
+  #options #option_delete_mes > i,
+  #options #option_new_bookmark > i,
+  #ANBlockToggle > .inline-drawer-icon.down,
+  #ANBlockToggle > .inline-drawer-icon.up,
+  #CFGBlockToggle > .inline-drawer-icon.down,
+  #CFGBlockToggle > .inline-drawer-icon.up,
+  #floatingPromptMaximize > i.fa-window-maximize,
+  #floatingPromptMaximize > i.fa-window-restore,
+  #cfgConfigMaximize > i.fa-window-maximize,
+  #cfgConfigMaximize > i.fa-window-restore
+)::before { content: ''; display: inline-block; width: 1em; height: 1em; vertical-align: middle; background: var(--ds-icon) center / contain no-repeat; -webkit-mask:none; mask:none; }
+body.ds-theme-active #leftNavDrawerIcon { --ds-icon: url('assets/icons/ds-icon-presets.webp'); }
+body.ds-theme-active #API-status-top.fa-plug { --ds-icon: url('assets/icons/ds-icon-api.webp'); }
+body.ds-theme-active #API-status-top.fa-plug-circle-exclamation { --ds-icon: url('assets/icons/ds-icon-api-off.webp'); }
+body.ds-theme-active #advanced-formatting-button .drawer-icon { --ds-icon: url('assets/icons/ds-icon-formatting.webp'); }
+body.ds-theme-active #WIDrawerIcon { --ds-icon: url('assets/icons/ds-icon-world-info.webp'); }
+body.ds-theme-active #user-settings-button .drawer-icon { --ds-icon: url('assets/icons/ds-icon-user-settings.webp'); }
+body.ds-theme-active #backgrounds-button .drawer-icon { --ds-icon: url('assets/icons/ds-icon-backgrounds.webp'); }
+body.ds-theme-active #extensions-settings-button .drawer-icon { --ds-icon: url('assets/icons/ds-icon-extensions.webp'); }
+body.ds-theme-active #persona-management-button .drawer-icon { --ds-icon: url('assets/icons/ds-icon-persona.webp'); }
+body.ds-theme-active #rightNavDrawerIcon { --ds-icon: url('assets/icons/ds-icon-characters.webp'); }
+body.ds-theme-active #send_but { --ds-icon: url('assets/icons/ds-icon-send.webp'); }
+body.ds-theme-active #mes_continue { --ds-icon: url('assets/icons/ds-icon-continue.webp'); }
+body.ds-theme-active #mes_impersonate { --ds-icon: url('assets/icons/ds-icon-impersonate.webp'); }
+body.ds-theme-active #options_button { --ds-icon: url('assets/icons/ds-icon-options.webp'); }
+body.ds-theme-active #extensionsMenuButton { --ds-icon: url('assets/icons/ds-icon-wand.webp'); }
+body.ds-theme-active #mes_stop > i { --ds-icon: url('assets/icons/ds-icon-stop.webp'); }
+body.ds-theme-active .popup .popup-button-close { --ds-icon: url('assets/icons/ds-icon-close.webp'); }
+body.ds-theme-active #character_cross { --ds-icon: url('assets/icons/ds-icon-close.webp'); }
+body.ds-theme-active #chat .mes .mes_edit { --ds-icon: url('assets/icons/ds-icon-edit.webp'); }
+body.ds-theme-active #chat .mes .mes_copy { --ds-icon: url('assets/icons/ds-icon-copy.webp'); }
+body.ds-theme-active #chat .mes .extraMesButtonsHint { --ds-icon: url('assets/icons/ds-icon-more.webp'); }
+body.ds-theme-active #chat .mes .mes_bookmark { --ds-icon: url('assets/icons/ds-icon-bookmark-filled.webp'); }
+body.ds-theme-active #chat .mes .mes_hide { --ds-icon: url('assets/icons/ds-icon-hide.webp'); }
+body.ds-theme-active #chat .mes .mes_unhide { --ds-icon: url('assets/icons/ds-icon-unhide.webp'); }
+body.ds-theme-active #chat .mes .mes_create_bookmark { --ds-icon: url('assets/icons/ds-icon-bookmark.webp'); }
+body.ds-theme-active #chat .mes .mes_create_branch { --ds-icon: url('assets/icons/ds-icon-branch.webp'); }
+body.ds-theme-active #chat .mes .mes_translate { --ds-icon: url('assets/icons/ds-icon-translate.webp'); }
+body.ds-theme-active #chat .mes .mes_narrate { --ds-icon: url('assets/icons/ds-icon-narrate.webp'); }
+body.ds-theme-active #chat .mes .mes_embed { --ds-icon: url('assets/icons/ds-icon-embed.webp'); }
+body.ds-theme-active #chat .mes .mes_prompt { --ds-icon: url('assets/icons/ds-icon-prompt.webp'); }
+body.ds-theme-active #chat .mes .swipe_left { --ds-icon: url('assets/icons/ds-icon-swipe-left.webp'); }
+body.ds-theme-active #chat .mes .swipe_right { --ds-icon: url('assets/icons/ds-icon-swipe-right.webp'); }
+body.ds-theme-active #chat .mes .mes_edit_done { --ds-icon: url('assets/icons/ds-icon-confirm.webp'); }
+body.ds-theme-active #chat .mes .mes_edit_cancel { --ds-icon: url('assets/icons/ds-icon-close.webp'); }
+body.ds-theme-active #chat .mes .mes_edit_delete { --ds-icon: url('assets/icons/ds-icon-delete.webp'); }
+body.ds-theme-active #chat .mes .mes_edit_copy { --ds-icon: url('assets/icons/ds-icon-copy.webp'); }
+body.ds-theme-active #chat .mes .mes_edit_up { --ds-icon: url('assets/icons/ds-icon-up.webp'); }
+body.ds-theme-active #chat .mes .mes_edit_down { --ds-icon: url('assets/icons/ds-icon-down.webp'); }
+body.ds-theme-active #chat .mes .mes_edit_add_reasoning { --ds-icon: url('assets/icons/ds-icon-reasoning-show.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_arrow { --ds-icon: url('assets/icons/ds-icon-reasoning-hide.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_edit { --ds-icon: url('assets/icons/ds-icon-edit.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_copy { --ds-icon: url('assets/icons/ds-icon-copy.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_close_all { --ds-icon: url('assets/icons/ds-icon-minimize.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_delete { --ds-icon: url('assets/icons/ds-icon-delete.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_edit_done { --ds-icon: url('assets/icons/ds-icon-confirm.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_edit_cancel { --ds-icon: url('assets/icons/ds-icon-close.webp'); }
+body.ds-theme-active #chat .mes .mes_media_gallery { --ds-icon: url('assets/icons/ds-icon-image.webp'); }
+body.ds-theme-active #chat .mes .mes_media_list { --ds-icon: url('assets/icons/ds-icon-gallery.webp'); }
+body.ds-theme-active #chat .mes .sd_message_gen { --ds-icon: url('assets/icons/ds-icon-image.webp'); }
+body.ds-theme-active #chat .mes .mes_swipe_picker { --ds-icon: url('assets/icons/ds-icon-bookmark.webp'); }
+body.ds-theme-active #chat .mes .mes_ghost { --ds-icon: url('assets/icons/ds-icon-ghost.webp'); }
+body.ds-theme-active #chat .mes .mes_reasoning_details[open] .mes_reasoning_arrow { --ds-icon: url('assets/icons/ds-icon-reasoning-show.webp'); }
+/* ST rotates a closed chevron; the replacement is a book and must remain upright. */
+body.ds-theme-active #chat .mes .mes_reasoning_arrow { font-size:var(--ds-icon-size-sm); width:1em; height:1em; }
+body.ds-theme-active #chat .mes .mes_reasoning_details:not([open]) .mes_reasoning_arrow { transform:translateY(-50%); }
+body.ds-theme-active #options #option_regenerate > i { --ds-icon: url('assets/icons/ds-icon-regenerate.webp'); }
+body.ds-theme-active #options #option_continue > i { --ds-icon: url('assets/icons/ds-icon-continue.webp'); }
+body.ds-theme-active #options #option_impersonate > i { --ds-icon: url('assets/icons/ds-icon-impersonate.webp'); }
+body.ds-theme-active #options #option_delete_mes > i { --ds-icon: url('assets/icons/ds-icon-delete.webp'); }
+body.ds-theme-active #options #option_new_bookmark > i { --ds-icon: url('assets/icons/ds-icon-bookmark.webp'); }
+
+/* State matrix, restricted to the glyph allow-list. */
+body.ds-theme-active :is(#leftNavDrawerIcon,
+#API-status-top.fa-plug,
+#API-status-top.fa-plug-circle-exclamation,
+#advanced-formatting-button .drawer-icon,
+#WIDrawerIcon,
+#user-settings-button .drawer-icon,
+#backgrounds-button .drawer-icon,
+#extensions-settings-button .drawer-icon,
+#persona-management-button .drawer-icon,
+#rightNavDrawerIcon,
+#send_but,
+#mes_continue,
+#mes_impersonate,
+#options_button,
+#extensionsMenuButton,
+#mes_stop > i,
+.popup .popup-button-close,
+#character_cross,
+#chat .mes .mes_edit,
+#chat .mes .mes_copy,
+#chat .mes .extraMesButtonsHint,
+#chat .mes .mes_bookmark,
+#chat .mes .mes_hide,
+#chat .mes .mes_unhide,
+#chat .mes .mes_create_bookmark,
+#chat .mes .mes_create_branch,
+#chat .mes .mes_translate,
+#chat .mes .mes_narrate,
+#chat .mes .mes_embed,
+#chat .mes .mes_prompt,
+#chat .mes .swipe_left,
+#chat .mes .swipe_right,
+#chat .mes .mes_edit_done,
+#chat .mes .mes_edit_cancel,
+#chat .mes .mes_edit_delete,
+#chat .mes .mes_edit_copy,
+#chat .mes .mes_edit_up,
+#chat .mes .mes_edit_down,
+#chat .mes .mes_edit_add_reasoning,
+#chat .mes .mes_reasoning_arrow,
+#chat .mes .mes_reasoning_edit,
+#chat .mes .mes_reasoning_copy,
+#chat .mes .mes_reasoning_close_all,
+#chat .mes .mes_reasoning_delete,
+#chat .mes .mes_reasoning_edit_done,
+#chat .mes .mes_reasoning_edit_cancel,
+#chat .mes .mes_media_gallery,
+#chat .mes .mes_media_list,
+#chat .mes .sd_message_gen,
+#chat .mes .mes_swipe_picker,
+#chat .mes .mes_ghost,
+#options #option_regenerate > i,
+#options #option_continue > i,
+#options #option_impersonate > i,
+#options #option_delete_mes > i,
+#options #option_new_bookmark > i):hover { color:var(--ds-lavender-hi); background-color:var(--ds-lavender-lo); }
+body.ds-theme-active :is(#leftNavDrawerIcon,
+#API-status-top.fa-plug,
+#API-status-top.fa-plug-circle-exclamation,
+#advanced-formatting-button .drawer-icon,
+#WIDrawerIcon,
+#user-settings-button .drawer-icon,
+#backgrounds-button .drawer-icon,
+#extensions-settings-button .drawer-icon,
+#persona-management-button .drawer-icon,
+#rightNavDrawerIcon,
+#send_but,
+#mes_continue,
+#mes_impersonate,
+#options_button,
+#extensionsMenuButton,
+#mes_stop > i,
+.popup .popup-button-close,
+#character_cross,
+#chat .mes .mes_edit,
+#chat .mes .mes_copy,
+#chat .mes .extraMesButtonsHint,
+#chat .mes .mes_bookmark,
+#chat .mes .mes_hide,
+#chat .mes .mes_unhide,
+#chat .mes .mes_create_bookmark,
+#chat .mes .mes_create_branch,
+#chat .mes .mes_translate,
+#chat .mes .mes_narrate,
+#chat .mes .mes_embed,
+#chat .mes .mes_prompt,
+#chat .mes .swipe_left,
+#chat .mes .swipe_right,
+#chat .mes .mes_edit_done,
+#chat .mes .mes_edit_cancel,
+#chat .mes .mes_edit_delete,
+#chat .mes .mes_edit_copy,
+#chat .mes .mes_edit_up,
+#chat .mes .mes_edit_down,
+#chat .mes .mes_edit_add_reasoning,
+#chat .mes .mes_reasoning_arrow,
+#chat .mes .mes_reasoning_edit,
+#chat .mes .mes_reasoning_copy,
+#chat .mes .mes_reasoning_close_all,
+#chat .mes .mes_reasoning_delete,
+#chat .mes .mes_reasoning_edit_done,
+#chat .mes .mes_reasoning_edit_cancel,
+#chat .mes .mes_media_gallery,
+#chat .mes .mes_media_list,
+#chat .mes .sd_message_gen,
+#chat .mes .mes_swipe_picker,
+#chat .mes .mes_ghost,
+#options #option_regenerate > i,
+#options #option_continue > i,
+#options #option_impersonate > i,
+#options #option_delete_mes > i,
+#options #option_new_bookmark > i):active { color:var(--ds-gold-hi); background-color:rgba(217,178,111,.10); }
+body.ds-theme-active :is(#leftNavDrawerIcon,
+#API-status-top.fa-plug,
+#API-status-top.fa-plug-circle-exclamation,
+#advanced-formatting-button .drawer-icon,
+#WIDrawerIcon,
+#user-settings-button .drawer-icon,
+#backgrounds-button .drawer-icon,
+#extensions-settings-button .drawer-icon,
+#persona-management-button .drawer-icon,
+#rightNavDrawerIcon,
+#send_but,
+#mes_continue,
+#mes_impersonate,
+#options_button,
+#extensionsMenuButton,
+#mes_stop > i,
+.popup .popup-button-close,
+#character_cross,
+#chat .mes .mes_edit,
+#chat .mes .mes_copy,
+#chat .mes .extraMesButtonsHint,
+#chat .mes .mes_bookmark,
+#chat .mes .mes_hide,
+#chat .mes .mes_unhide,
+#chat .mes .mes_create_bookmark,
+#chat .mes .mes_create_branch,
+#chat .mes .mes_translate,
+#chat .mes .mes_narrate,
+#chat .mes .mes_embed,
+#chat .mes .mes_prompt,
+#chat .mes .swipe_left,
+#chat .mes .swipe_right,
+#chat .mes .mes_edit_done,
+#chat .mes .mes_edit_cancel,
+#chat .mes .mes_edit_delete,
+#chat .mes .mes_edit_copy,
+#chat .mes .mes_edit_up,
+#chat .mes .mes_edit_down,
+#chat .mes .mes_edit_add_reasoning,
+#chat .mes .mes_reasoning_arrow,
+#chat .mes .mes_reasoning_edit,
+#chat .mes .mes_reasoning_copy,
+#chat .mes .mes_reasoning_close_all,
+#chat .mes .mes_reasoning_delete,
+#chat .mes .mes_reasoning_edit_done,
+#chat .mes .mes_reasoning_edit_cancel,
+#chat .mes .mes_media_gallery,
+#chat .mes .mes_media_list,
+#chat .mes .sd_message_gen,
+#chat .mes .mes_swipe_picker,
+#chat .mes .mes_ghost,
+#options #option_regenerate > i,
+#options #option_continue > i,
+#options #option_impersonate > i,
+#options #option_delete_mes > i,
+#options #option_new_bookmark > i):is([disabled],[aria-disabled="true"]) { color:var(--ds-disabled-fg); border:1px dashed var(--ds-disabled-border); cursor:not-allowed; box-shadow:none; transform:none; }
+body.ds-theme-active :is(#leftNavDrawerIcon,
+#API-status-top.fa-plug,
+#API-status-top.fa-plug-circle-exclamation,
+#advanced-formatting-button .drawer-icon,
+#WIDrawerIcon,
+#user-settings-button .drawer-icon,
+#backgrounds-button .drawer-icon,
+#extensions-settings-button .drawer-icon,
+#persona-management-button .drawer-icon,
+#rightNavDrawerIcon,
+#send_but,
+#mes_continue,
+#mes_impersonate,
+#options_button,
+#extensionsMenuButton,
+#mes_stop > i,
+.popup .popup-button-close,
+#character_cross,
+#chat .mes .mes_edit,
+#chat .mes .mes_copy,
+#chat .mes .extraMesButtonsHint,
+#chat .mes .mes_bookmark,
+#chat .mes .mes_hide,
+#chat .mes .mes_unhide,
+#chat .mes .mes_create_bookmark,
+#chat .mes .mes_create_branch,
+#chat .mes .mes_translate,
+#chat .mes .mes_narrate,
+#chat .mes .mes_embed,
+#chat .mes .mes_prompt,
+#chat .mes .swipe_left,
+#chat .mes .swipe_right,
+#chat .mes .mes_edit_done,
+#chat .mes .mes_edit_cancel,
+#chat .mes .mes_edit_delete,
+#chat .mes .mes_edit_copy,
+#chat .mes .mes_edit_up,
+#chat .mes .mes_edit_down,
+#chat .mes .mes_edit_add_reasoning,
+#chat .mes .mes_reasoning_arrow,
+#chat .mes .mes_reasoning_edit,
+#chat .mes .mes_reasoning_copy,
+#chat .mes .mes_reasoning_close_all,
+#chat .mes .mes_reasoning_delete,
+#chat .mes .mes_reasoning_edit_done,
+#chat .mes .mes_reasoning_edit_cancel,
+#chat .mes .mes_media_gallery,
+#chat .mes .mes_media_list,
+#chat .mes .sd_message_gen,
+#chat .mes .mes_swipe_picker,
+#chat .mes .mes_ghost,
+#options #option_regenerate > i,
+#options #option_continue > i,
+#options #option_impersonate > i,
+#options #option_delete_mes > i,
+#options #option_new_bookmark > i):is([disabled],[aria-disabled="true"])::before { opacity:.45; filter:grayscale(1); } /* colour no longer affects raster icons */
+body.ds-theme-active :is(#mes_stop,.popup .popup-button-close,#chat .mes .mes_edit_delete,#chat .mes .mes_reasoning_delete,#options #option_delete_mes > i):hover { color:var(--ds-crimson-text); background-color:var(--ds-crimson-lo); }
+body.ds-theme-active :is(#send_but,#mes_continue):is(:hover,:focus-visible) { box-shadow:var(--ds-glow-lavender); }
+/* Native redOverlayGlow is #800 at .8 opacity: replace its unreadable red with the AA state token. */
+body.ds-theme-active #API-status-top.redOverlayGlow { color:var(--ds-crimson-text); opacity:1 !important; text-shadow:none; }
+body.ds-theme-active.noShadows :is(#send_but,#mes_continue):is(:hover,:focus-visible) { box-shadow:none; filter:none; }
+body.ds-theme-active #send_form #mes_stop > i:is(:hover,:active) { color:inherit; background:none; }
+
+body.ds-theme-active #ANBlockToggle > .inline-drawer-icon.down { --ds-icon: url('assets/icons/ds-icon-down.webp'); }
+body.ds-theme-active #ANBlockToggle > .inline-drawer-icon.up { --ds-icon: url('assets/icons/ds-icon-up.webp'); }
+body.ds-theme-active #CFGBlockToggle > .inline-drawer-icon.down { --ds-icon: url('assets/icons/ds-icon-down.webp'); }
+body.ds-theme-active #CFGBlockToggle > .inline-drawer-icon.up { --ds-icon: url('assets/icons/ds-icon-up.webp'); }
+body.ds-theme-active #floatingPromptMaximize > i.fa-window-maximize { --ds-icon: url('assets/icons/ds-icon-maximize.webp'); }
+body.ds-theme-active #floatingPromptMaximize > i.fa-window-restore { --ds-icon: url('assets/icons/ds-icon-restore.webp'); }
+body.ds-theme-active #cfgConfigMaximize > i.fa-window-maximize { --ds-icon: url('assets/icons/ds-icon-maximize.webp'); }
+body.ds-theme-active #cfgConfigMaximize > i.fa-window-restore { --ds-icon: url('assets/icons/ds-icon-restore.webp'); }
+
+@media (forced-colors:active) {
+body.ds-theme-active :is(#leftNavDrawerIcon,
+#API-status-top.fa-plug,
+#API-status-top.fa-plug-circle-exclamation,
+#advanced-formatting-button .drawer-icon,
+#WIDrawerIcon,
+#user-settings-button .drawer-icon,
+#backgrounds-button .drawer-icon,
+#extensions-settings-button .drawer-icon,
+#persona-management-button .drawer-icon,
+#rightNavDrawerIcon,
+#send_but,
+#mes_continue,
+#mes_impersonate,
+#options_button,
+#extensionsMenuButton,
+#mes_stop > i,
+.popup .popup-button-close,
+#character_cross,
+#chat .mes .mes_edit,
+#chat .mes .mes_copy,
+#chat .mes .extraMesButtonsHint,
+#chat .mes .mes_bookmark,
+#chat .mes .mes_hide,
+#chat .mes .mes_unhide,
+#chat .mes .mes_create_bookmark,
+#chat .mes .mes_create_branch,
+#chat .mes .mes_translate,
+#chat .mes .mes_narrate,
+#chat .mes .mes_embed,
+#chat .mes .mes_prompt,
+#chat .mes .swipe_left,
+#chat .mes .swipe_right,
+#chat .mes .mes_edit_done,
+#chat .mes .mes_edit_cancel,
+#chat .mes .mes_edit_delete,
+#chat .mes .mes_edit_copy,
+#chat .mes .mes_edit_up,
+#chat .mes .mes_edit_down,
+#chat .mes .mes_edit_add_reasoning,
+#chat .mes .mes_reasoning_arrow,
+#chat .mes .mes_reasoning_edit,
+#chat .mes .mes_reasoning_copy,
+#chat .mes .mes_reasoning_close_all,
+#chat .mes .mes_reasoning_delete,
+#chat .mes .mes_reasoning_edit_done,
+#chat .mes .mes_reasoning_edit_cancel,
+#chat .mes .mes_media_gallery,
+#chat .mes .mes_media_list,
+#chat .mes .sd_message_gen,
+#chat .mes .mes_swipe_picker,
+#chat .mes .mes_ghost,
+#options #option_regenerate > i,
+#options #option_continue > i,
+#options #option_impersonate > i,
+#options #option_delete_mes > i,
+#options #option_new_bookmark > i,
+#ANBlockToggle > .inline-drawer-icon.down,
+#ANBlockToggle > .inline-drawer-icon.up,
+#CFGBlockToggle > .inline-drawer-icon.down,
+#CFGBlockToggle > .inline-drawer-icon.up,
+#floatingPromptMaximize > i.fa-window-maximize,
+#floatingPromptMaximize > i.fa-window-restore,
+#cfgConfigMaximize > i.fa-window-maximize,
+#cfgConfigMaximize > i.fa-window-restore)::before { background-image:none; background-color:CanvasText; -webkit-mask:var(--ds-icon) center / contain no-repeat; mask:var(--ds-icon) center / contain no-repeat; forced-color-adjust:none; }
+}

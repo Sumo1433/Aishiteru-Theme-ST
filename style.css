@@ -1,0 +1,8 @@
+@import url('icons.css');
+@import url('frames.css');
+@import url('motion.css');
+
+#dst_settings .dst-row { display: flex; flex-wrap: wrap; gap: 6px; margin-block: 6px; }
+#dst_settings .dst-status { opacity: .85; font-size: .9em; margin-top: 4px; white-space: pre-line; }
+#dst_settings .dst-hint { opacity: .7; font-size: .85em; }
+#dst_settings .menu_button[disabled] { opacity: .5; pointer-events: none; }

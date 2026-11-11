@@ -1,0 +1,1153 @@
+/* Aishiteru Theme 1.0.0 | SillyTavern 1.19+ | 0. imports */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Manrope:wght@500;600&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Prata&display=swap');
+
+/* 0.1 Optional switches. Uncomment only the rule block below a label.
+   Optional !important declarations override later state-specific rules;
+   switches can be enabled here without moving them. */
+/* === MOTION OFF === */
+/* MOTION-LIST: sync with section 13 and extension motion.css */
+/*
+#bg1::before, #bg1::after,
+#chat .mes.last_mes, #chat .mes::before, #chat .mes::after,
+#chat .mes .swipes-counter::after,
+.drawer-content.openDrawer > *,
+.popup[opening], .popup[closing], .popup[opening]::backdrop, .popup[closing]::backdrop,
+#chat .mes.ds-new,
+#top-settings-holder .drawer-icon::before,
+dialog.popup::before,
+#send_form #mes_stop::after,
+#toast-container > div::after,
+#chat .mes > .mesAvatarWrapper::after,
+#send_but,
+#mes_continue,
+#options_button,
+.popup-button-close,
+body #toast-container > div {
+    animation: none !important;
+}
+body *, body *::before, body *::after { transition-duration: 0ms !important; }
+body[data-generating="true"] #chat .last_mes:not([is_user="true"])::before { opacity: .8; }
+body.ds-theme-active[data-generating="true"] #chat .last_mes > .mesAvatarWrapper::after { content: none; }
+#chat .mes:is(.ds-rewinding,.ds-new[is_user="true"])::after { content:none !important; }
+#chat .mes > .ds-fx { display:none !important; }
+#chat .mes.ds-rewinding .swipes-counter { color:#e6e1f0 !important; }
+body :is(.menu_button,.drawer-icon,#send_but,#mes_continue,#options_button,.popup-button-close,.swipe_left,.swipe_right):is(:hover,:active) { transform:none !important; }
+*/
+/* === GLASS MODE === */
+/*
+#top-bar, #send_form, .drawer-content.openDrawer {
+    backdrop-filter: blur(6px);
+}
+#bg1::before, #bg1::after { animation: none !important; }
+*/
+/* === CONTENT-VISIBILITY ===
+   Small benefit with ~100 messages; can break bookmark scrollIntoView,
+   cause upward scroll jumps and clip shadows. Disabled by default.
+#chat .mes:not(.last_mes) {
+    content-visibility: auto;
+    contain-intrinsic-block-size: auto 160px;
+}
+*/
+
+/* 1. tokens. SmartTheme values are owned by ST's inline theme settings. */
+:root {
+    /* Use ST's own block-size token so its chat/drawer offsets stay consistent. */
+    /* --ds-tb-rows becomes 2 on narrow phones with 10+ top-bar icons (section 14). */
+    --ds-tb-rows: 1;
+    --topBarBlockSize: calc(max(40px, calc(var(--topBarIconSize) + var(--topBarBlockPadding))) * var(--ds-tb-rows));
+    --mainFontFamily: 'Manrope', 'Segoe UI', sans-serif;
+    --monoFontFamily: 'JetBrains Mono', 'Consolas', monospace;
+    --ds-reading-font: 'PT Serif', 'Georgia', serif;
+    --ds-title-font: 'Prata', 'PT Serif', 'Georgia', serif;
+    --ds-bg: #0b0a12;
+    --ds-strong: #f7f4fc;
+    --ds-muted: #a79fbf;
+    --ds-lavender: #a88bff;
+    --ds-gold: var(--SmartThemeUnderlineColor);
+    --ds-ice: var(--SmartThemeEmColor);
+    --ds-crimson: #c2384b;
+    --ds-success: #7ed6a8;
+    --ds-warning: #e0b45c;
+    --ds-error: #ed7b8b;
+    --ds-info: #7fb2ff;
+    --ds-pink: #f2a7c3;
+    --ds-radius-message: 10px;
+    --ds-radius-panel: 14px;
+    --ds-radius-field: 6px;
+    --ds-ease-out: cubic-bezier(.22,1,.36,1);
+    --ds-ease-inout: cubic-bezier(.65,0,.35,1);
+    --ds-ease-in: cubic-bezier(.55,0,1,.45);
+    --ds-ease-rewind: cubic-bezier(.5,0,.2,1);
+    --ds-ease-stamp: cubic-bezier(.34,1.45,.64,1);
+    --ds-t-xs: 90ms;
+    --ds-t-s: 160ms;
+    --ds-t-m: 240ms;
+    --ds-t-l: 360ms;
+
+--ds-surface-1: #12101c;            /* chat tint solid */
+--ds-surface-2: #1a1726;            /* bot message solid */
+--ds-surface-3: #221e31;            /* panel solid */
+--ds-surface-raised: #2a2540;       /* hover fill on panel items */
+/* accent ramps */
+--ds-lavender-hi: #bfa8ff;          /* hover text/icon, 7.9:1 on panel */
+--ds-lavender-lo: rgba(168,139,255,.14);  /* hover/selected fill */
+--ds-gold-hi: #e6c78f;              /* active icon on hover */
+--ds-gold-line: rgba(217,178,111,.32);    /* ornament strokes (matches --ds-corner) */
+--ds-gold-rule: rgba(217,178,111,.14);    /* inner hairline (existing outline values 0.12–0.16 → unify) */
+--ds-crimson-text: #e05a6c;         /* crimson that passes AA as text (4.5:1 on panel) */
+--ds-crimson-lo: rgba(194,56,75,.16);     /* destructive hover fill */
+--ds-ice-line: rgba(156,195,230,.38);     /* frost ornament strokes */
+--ds-shadow-hand: rgba(92,58,140,.35);    /* Witch-shadow tint, edge-only */
+/* borders */
+--ds-border: var(--SmartThemeBorderColor);   /* #887b98, 4.1:1 on panel = non-text 3:1 OK */
+--ds-border-subtle: #3a3352;        /* dividers inside panels, 1.4:1 – decorative only */
+--ds-border-strong: #a79fbf;
+/* states */
+--ds-disabled-fg: #6f6884;          /* 3.1:1 — allowed for disabled only (WCAG exempt) */
+--ds-disabled-border: #3a3352;
+--ds-focus-ring: var(--ds-lavender);
+--ds-focus-width: 2px;
+--ds-focus-offset: 3px;
+/* frame geometry */
+--ds-frame-inset: 4px;              /* inner gilt rule offset (existing outline-offset -4/-5 → -4 everywhere) */
+--ds-frame-line: 1px;
+--ds-ornament-stroke: .8px;         /* at 1x in ornament SVGs */
+--ds-corner-size: 40px;             /* message corner fitting */
+--ds-corner-size-panel: 44px;       /* drawer/popup corner fitting */
+/* icon */
+--ds-icon-size: 20px;               /* inside 40px hit targets */
+--ds-icon-size-sm: 16px;            /* message action buttons */
+--ds-icon-stroke: 1.75;              /* in 24-unit viewBox */
+/* glow */
+--ds-glow-lavender: 0 0 0 1px rgba(168,139,255,.55), 0 0 12px rgba(168,139,255,.18);
+--ds-glow-gold: 0 0 0 1px rgba(217,178,111,.5), 0 0 10px rgba(217,178,111,.14);
+--ds-glow-crimson: 0 0 0 1px rgba(224,90,108,.6), 0 0 12px rgba(194,56,75,.22);
+--ds-shadow-panel: 0 8px 24px rgba(0,0,0,.45);
+
+    --reasoning-body-color: var(--SmartThemeBodyColor);
+    --reasoning-em-color: var(--SmartThemeEmColor);
+    --ds-grain: none; /* ImageGen artwork is supplied by the extension. */
+    --ds-clock: none; /* ImageGen artwork is supplied by the extension. */
+    --ds-corner: none; /* ImageGen artwork is supplied by the extension. */
+    --ds-frost: none; /* ImageGen artwork is supplied by the extension. */
+    --ds-seal: none; /* ImageGen artwork is supplied by the extension. */
+}
+
+/* 2. base & typography. No changes to ST's moving/resizing geometry. */
+body {
+    color: var(--SmartThemeBodyColor);
+    background-color: var(--ds-bg);
+    font-family: var(--mainFontFamily);
+    -webkit-font-smoothing: antialiased;
+    color-scheme: dark;
+}
+::selection { background: #51406d; color: #f7f4fc; }
+body a { color: var(--ds-lavender); text-underline-offset: .2em; }
+body a:hover { text-decoration-thickness: 2px; }
+body :is(input, select, textarea) { font-family: var(--mainFontFamily); }
+body :is(button, .menu_button, .interactable, input, select, textarea, summary):focus-visible {
+    outline: 2px solid var(--ds-lavender);
+    outline-offset: 3px;
+}
+body :is(h1, h2, h3, h4) {
+    color: var(--SmartThemeBodyColor);
+    font-family: var(--ds-title-font);
+    font-weight: 400; /* Prata ships one weight: avoid faux bold */
+    letter-spacing: .01em;
+    /* break-word, not anywhere: "anywhere" lets flex rows squeeze a heading to one letter per line. */
+    overflow-wrap: break-word;
+}
+
+/* 3. background. The desktop background-image is always selected by ST. */
+#bg1 { overflow: hidden; background-color: var(--ds-bg); box-shadow: inset 0 0 20vmax rgba(11,10,18,.55); }
+#bg1::before, #bg1::after {
+    content: '';
+    position: absolute;
+    inset: -4%;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    opacity: .16;
+    will-change: auto;
+}
+#bg1::before {
+    background-image: radial-gradient(ellipse at 2% 88%, rgba(68,37,84,.7), transparent 35%), radial-gradient(ellipse at 94% 8%, rgba(100,79,145,.45), transparent 29%);
+    animation: none; opacity: .18;
+}
+#bg1::after {
+    background-image: radial-gradient(circle at 8% 20%, #cdb9ff 0 2px, transparent 5px), radial-gradient(circle at 93% 36%, #9cc3e6 0 1px, transparent 4px), radial-gradient(circle at 84% 12%, #d9b26f 0 1px, transparent 4px), radial-gradient(circle at 15% 65%, #cdb9ff 0 1px, transparent 4px);
+    opacity: .2; will-change: transform; animation: ds-spirits 150s linear infinite alternate;
+}
+#chat {
+    background-color: var(--SmartThemeChatTintColor);
+    background-image: linear-gradient(90deg, transparent, rgba(11,10,18,.16) 50%, transparent);
+    color: var(--SmartThemeBodyColor);
+    border-inline: 1px solid var(--SmartThemeBorderColor);
+    scrollbar-gutter: stable;
+    padding-inline: 12px;
+}
+
+/* 4. chat & messages. Only last_mes receives an entry animation. */
+#chat .mes {
+    position: relative;
+    background-color: var(--SmartThemeBotMesBlurTintColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    outline: none;
+    outline-offset: -4px;
+    border-radius: var(--ds-radius-message);
+    margin-block: 12px;
+    padding: 18px 16px;
+    box-shadow: none;
+    min-width: 0;
+}
+#chat .mes[is_user="true"] {
+    background-color: var(--SmartThemeUserMesBlurTintColor);
+    border-inline-start: 3px solid var(--ds-lavender);
+}
+#chat .mes[is_system="true"], #chat .mes.smallSysMes {
+    background-color: var(--SmartThemeChatTintColor);
+    border-style: dashed;
+    box-shadow: none;
+}
+#chat .mes.smallSysMes { padding-block: 12px; }
+#chat .mes[is_system="true"] .mes_text, #chat .mes.smallSysMes .mes_text {
+    font-family: var(--mainFontFamily);
+    font-size: max(15px, var(--mainFontSize));
+}
+#chat .mes.selected { outline: 2px solid var(--ds-lavender); outline-offset: -4px; }
+#chat .mes.toolCall { border-inline-start: 3px double var(--ds-gold); }
+#chat .mes.ds-new { animation: ds-mes-in var(--ds-t-m) var(--ds-ease-out) backwards; }
+#chat .mes::before, #chat .mes::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+    border-radius: inherit;
+    opacity: 0;
+}
+#chat .mes::before {
+    inset: 10px auto 10px 0;
+    width: 2px;
+    background: var(--ds-gold);
+}
+#chat .mes::after {
+    inset: 0;
+    background: linear-gradient(90deg, rgba(194,56,75,.7), transparent 26%, transparent 74%, rgba(194,56,75,.5));
+}
+body[data-generating="true"] #chat .last_mes:not([is_user="true"])::before {
+    opacity: .3; transition: opacity var(--ds-t-s) var(--ds-ease-out);
+    animation: ds-generate 2.4s var(--ds-ease-inout) infinite;
+}
+#chat .mes .ch_name { color: var(--ds-gold); align-items: center; row-gap: 6px; }
+#chat .mes .name_text {
+    font-family: var(--ds-title-font);
+    font-weight: 400; /* Prata ships one weight: avoid faux bold */
+    font-size: 1.15em;
+    letter-spacing: .01em;
+    background: var(--ds-clock) left bottom / 100px 14px no-repeat;
+    padding-bottom: 14px;
+    overflow-wrap: break-word;
+}
+#chat .mes :is(.timestamp, .mesIDDisplay, .mes_timer, .tokenCounterDisplay, .mes_ghost) {
+    color: var(--ds-muted);
+    font-family: var(--mainFontFamily);
+    font-size: .8rem;
+    opacity: 1;
+}
+#chat .mes .avatar {
+    border: 1px solid var(--ds-gold);
+    outline: 1px solid var(--SmartThemeBorderColor);
+    outline-offset: 3px;
+    background: conic-gradient(from 45deg, #d9b26f, #3a3352, #9cc3e6, #3a3352, #d9b26f);
+    box-shadow: inset 0 0 0 2px var(--ds-bg);
+}
+#chat .mes .avatar img { border-radius: inherit; }
+#chat .mes .mes_buttons {
+    opacity: 1;
+    color: var(--SmartThemeBodyColor);
+    transition: opacity 160ms ease;
+    gap: 4px;
+}
+#chat .mes:is(:hover, :focus-within) .mes_buttons { opacity: 1; }
+body.expandMessageActions #chat .mes .mes_buttons { opacity: 1; }
+/* v2.1: calmer frame — message actions appear on hover/focus where a mouse exists */
+@media (hover: hover) {
+    #chat .mes .mes_buttons { opacity: 0; }
+    #chat .mes:is(:hover, :focus-within) .mes_buttons { opacity: 1; }
+}
+#chat .mes :is(.mes_button, .mes_edit, .extraMesButtonsHint, .mes_edit_buttons > *) {
+    opacity: 1;
+    filter: none;
+    min-width: 28px;
+    min-height: 28px;
+    padding: 6px;
+    border-radius: var(--ds-radius-field);
+    color: var(--SmartThemeBodyColor);
+}
+#chat .mes :is(.mes_button, .mes_edit, .extraMesButtonsHint, .mes_edit_buttons > *):hover {
+    color: var(--ds-lavender);
+    background-color: var(--SmartThemeBlurTintColor);
+}
+#chat .mes textarea {
+    color: var(--SmartThemeBodyColor);
+    background-color: var(--SmartThemeBlurTintColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-field);
+    font-family: var(--ds-reading-font);
+    font-weight: 400;
+    font-size: max(15px, calc(var(--mainFontSize) * 1.1));
+    line-height: 1.65;
+    min-height: 12rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+}
+body.bubblechat #chat .mes { border-radius: var(--ds-radius-message); }
+body.documentstyle #chat .mes { border-radius: 3px; outline: none; }
+body.hideChatAvatars #chat .mes { padding-inline: 18px; }
+body.noShadows #chat .mes { box-shadow: none; }
+
+/* Header wrapping preserves all controls when names are long. */
+#chat .mes .ch_name > .name_text { min-width: 0; white-space: normal; }
+#chat .mes .mes_edit_buttons { opacity: 1; filter: none; flex-wrap: wrap; }
+/* VERIFY: .mes_edit_cancel/.mes_edit_done verified in public/style.css. */
+#chat .mes .mes_edit_cancel.menu_button { background-color: var(--SmartThemeBlurTintColor); border-color: var(--ds-error); }
+#chat .mes .mes_edit_done.menu_button { background-color: var(--SmartThemeBlurTintColor); border-color: var(--ds-success); }
+
+/* 5. RP markup. Distinctions survive grayscale: weight/style/decoration. */
+#chat .mes .mes_text {
+    font-family: var(--ds-reading-font);
+    font-weight: 400;
+    font-size: max(15px, calc(var(--mainFontSize) * 1.13));
+    line-height: 1.65;
+    max-width: 72ch;
+    min-width: 0;
+    color: var(--SmartThemeBodyColor);
+    overflow-wrap: anywhere;
+    padding-block: 5px;
+}
+#chat .mes .mes_text p { margin-block: .35em 1em; }
+#chat .mes .mes_text :is(em, i) { color: var(--SmartThemeEmColor); font-style: italic; }
+#chat .mes .mes_text strong { color: var(--SmartThemeBodyColor); font-weight: 700; }
+#chat .mes .mes_text q {
+    color: var(--SmartThemeQuoteColor);
+    font-style: normal;
+}
+#chat .mes .mes_text q::before, #chat .mes .mes_text q::after { content: ''; }
+#chat .mes .mes_text q em { color: var(--SmartThemeQuoteColor); font-style: italic; }
+#chat .mes .mes_text u {
+    color: var(--SmartThemeUnderlineColor);
+    text-decoration-style: double;
+    text-underline-offset: .2em;
+}
+#chat .mes .mes_text blockquote {
+    border-inline-start: 3px solid var(--SmartThemeQuoteColor);
+    margin-inline: 0;
+    padding: .65em 1em;
+    color: var(--SmartThemeBodyColor);
+    background: rgba(11,10,18,.3);
+    border-radius: 0 6px 6px 0;
+}
+#chat .mes .mes_text code {
+    font-family: var(--monoFontFamily);
+    font-size: .92em;
+    color: var(--SmartThemeBodyColor);
+    background: rgba(11,10,18,.7);
+    padding: .12em .3em;
+    border-radius: 4px;
+    overflow-wrap: anywhere;
+}
+#chat .mes .mes_text pre {
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-field);
+    background: var(--ds-bg);
+    padding: 14px;
+    scrollbar-width: thin;
+}
+#chat .mes .mes_text pre code {
+    display: block;
+    padding: 0;
+    background: transparent;
+    white-space: pre;
+    line-height: 1.6;
+    overflow-wrap: normal;
+    color: var(--SmartThemeBodyColor);
+}
+/* VERIFY: syntax highlighters add spans outside the supplied DOM map.
+   Verified local ST uses highlight.js. Inherit readable monochrome code. */
+/* v2.1: highlight.js span colours are kept */
+#chat .mes .mes_text hr {
+    border: 0;
+    height: 20px;
+    background: var(--ds-clock) center / 120px 18px no-repeat;
+    margin-block: 1.4em;
+}
+#chat .mes .mes_text :is(ul, ol) { padding-inline-start: 1.5em; }
+#chat .mes .mes_text li { margin-block: .3em; }
+#chat .mes .mes_text img, #chat .mes .mes_media_wrapper { max-width: 100%; }
+/* Reasoning: a page from the witch's book. Gold-framed plum card, Prata title, thoughts in muted italic.
+   The divider ornament under the title is painted by the extension (frames.css). */
+#chat .mes .mes_reasoning_details {
+    max-width: 72ch;
+    margin: 10px 0;
+    border: 1px solid rgba(217,178,111,.28);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(36,24,46,.92), rgba(20,15,30,.92));
+    box-shadow: inset 0 0 0 1px rgba(168,139,255,.07), 0 3px 14px rgba(0,0,0,.4);
+    padding: 0;
+    overflow: hidden;
+    color: var(--SmartThemeBodyColor);
+}
+/* ST offsets the block by --mes-right-spacing and pulls the summary back out by the same amount;
+   with the theme's border that pushed the header past the frame. */
+#chat .mes .mes_reasoning_details, #chat .mes .mes_reasoning_details .mes_reasoning_summary { margin-right: 0; }
+#chat .mes .mes_reasoning_summary { cursor: pointer; min-height: 28px; }
+#chat .mes .mes_reasoning_header {
+    margin: 0;
+    padding: 9px 14px;
+    padding-right: calc(.7em + 30px);
+    border-radius: 0;
+    background: transparent;
+    transition: background-color var(--ds-t-s) var(--ds-ease-out);
+}
+#chat .mes .mes_reasoning_header_title {
+    font-family: var(--ds-title-font);
+    font-weight: 400;
+    font-size: 1.02em;
+    letter-spacing: .03em;
+    line-height: 1.3;
+    color: var(--ds-gold);
+}
+#chat .mes .mes_reasoning_details[data-has-content="true"] .mes_reasoning_header:hover { background-color: rgba(217,178,111,.08); }
+/* Header and its actions share one row; the title gives way first. */
+#chat .mes .mes_reasoning_details .mes_reasoning_summary { flex-wrap: nowrap; align-items: center; gap: 0; }
+#chat .mes .mes_reasoning_header_block { flex: 1 1 auto; min-width: 0; }
+/* Open on a narrow screen: the actions drop below the title instead of squeezing it. */
+#chat .mes .mes_reasoning_details[open] .mes_reasoning_summary { flex-wrap: wrap; }
+#chat .mes .mes_reasoning_details[open] .mes_reasoning_header_block { flex: 1 1 14em; }
+#chat .mes .mes_reasoning_details[open] .mes_reasoning_actions { margin-left: auto; }
+#chat .mes .mes_reasoning_header { width: 100%; box-sizing: border-box; min-width: 0; }
+#chat .mes .mes_reasoning_header_title { min-width: 0; overflow-wrap: anywhere; }
+#chat .mes .mes_reasoning_actions { flex: 0 0 auto; flex-wrap: nowrap; gap: 0; padding-right: 4px; }
+#chat .mes .mes_reasoning_details[open] .mes_reasoning_summary { padding-bottom: 10px; }
+#chat .mes .mes_reasoning {
+    color: #cdbff0;
+    font-family: var(--ds-reading-font);
+    font-style: italic;
+    font-size: max(15px, var(--mainFontSize));
+    line-height: 1.75;
+    margin: 0;
+    padding: 10px 20px 16px;
+    border-left: 0;
+    overflow-wrap: anywhere;
+}
+
+/* 6. swipes. No transforms or animation on ST's native sliding blocks. */
+#chat .mes :is(.swipe_left, .swipe_right) {
+    opacity: 1;
+    color: var(--ds-lavender);
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 50%;
+    transition: transform var(--ds-t-xs) var(--ds-ease-out);
+}
+#chat .mes :is(.swipe_left, .swipe_right):hover { transform: translateY(-1px); color: var(--SmartThemeBodyColor); }
+#chat .mes .swipes-counter {
+    position: relative;
+    opacity: 1;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 12px 7px;
+    line-height: 20px;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 50%;
+    color: var(--ds-pink);
+    background-color: var(--SmartThemeBlurTintColor);
+    font-family: var(--monoFontFamily);
+    font-size: 12px;
+}
+#chat .mes .swipes-counter::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 50%;
+    background: repeating-conic-gradient(from 0deg, transparent 0deg 28deg, rgba(217,178,111,.7) 28deg 30deg);
+    mask: radial-gradient(circle, transparent 62%, #000 65%);
+    pointer-events: none;
+}
+#chat .mes .swipes-counter::after {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border-radius: 50%;
+    background: linear-gradient(var(--ds-gold), var(--ds-gold)) center 1px / 1px 6px no-repeat;
+    pointer-events: none;
+    transform-origin: center;
+}
+body.swipeAllMessages #chat .mes:not(.last_mes) .swipes-counter { color: var(--ds-pink); opacity: 1; }
+/* The extension paints the ImageGen rewind strip; the dial turn stays independent. */
+#chat .mes.last_mes.ds-rewinding .swipes-counter::after {
+    animation: ds-rewind-hand 500ms var(--ds-ease-rewind);
+}
+
+/* Reserve a bottom rail so the larger dial never covers prose. */
+#chat .mes.last_mes:not(.smallSysMes, [is_user="true"]),
+body.swipeAllMessages #chat .mes:not(.smallSysMes, [is_user="true"]) { padding-bottom: 86px; }
+/* !important: ST toggle-dependent.css forces 20px for hideChatAvatars; the swipe dial rail needs 86px */
+body.hideChatAvatars #chat .mes.last_mes:not(.smallSysMes, [is_user="true"]) { padding-bottom: 86px !important; }
+#chat .mes .swipe_left { bottom: 50px; }
+/* The welcome message cannot be swiped: ST hides the dial there, but the theme forces opacity: 1. */
+#chat .mes:is([type="assistant_message"], [type="welcome_prompt"]) :is(.swipe_left, .swipe_right, .swipes-counter) { display: none; }
+
+/* 7. input. ST retains ownership of every send/stop button's display. */
+#send_form {
+    position: relative;
+    background-color: var(--SmartThemeBlurTintColor);
+    background-image: var(--ds-grain);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-panel);
+    outline: 1px solid var(--ds-gold-rule);
+    outline-offset: -4px;
+    padding: 8px;
+    gap: 6px;
+}
+#send_form::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--ds-frost) left bottom / 360px 70px no-repeat;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--ds-t-s) ease;
+}
+#send_form:focus-within { border-color: var(--ds-lavender); }
+#send_form:focus-within::after { opacity: .6; }
+#send_textarea {
+    background: transparent;
+    color: var(--SmartThemeBodyColor);
+    font-family: var(--ds-reading-font);
+    font-weight: 400;
+    font-size: max(15px, calc(var(--mainFontSize) * 1.1));
+    line-height: 1.5;
+    padding: 5px 10px;
+    border-radius: var(--ds-radius-field);
+    min-width: 0;
+    resize: none;
+}
+#send_textarea::placeholder { color: var(--ds-muted); opacity: 1; }
+#leftSendForm, #rightSendForm { gap: 3px; }
+/* VERIFY: #nonQRFormItems exists in local 1.19 public/index.html:8102;
+   the supplied map omits this intermediate wrapper. */
+#send_form #nonQRFormItems { min-width: 0; flex-wrap: wrap; align-items: center; gap: 6px; }
+#send_form #send_textarea { flex: 1 1 180px; order: 2; }
+#send_form #rightSendForm { order: 3; max-width: 100%; }
+#send_form #leftSendForm { order: 1; }
+#send_form :is(#send_but, #mes_continue, #mes_impersonate, #mes_stop, #options_button):hover { filter: none; }
+
+#send_form :is(#send_but, #mes_continue, #mes_impersonate, #mes_stop, #options_button) {
+    opacity: 1;
+    min-width: 40px;
+    min-height: 40px;
+    box-sizing: border-box;
+    border-radius: var(--ds-radius-field);
+    color: var(--ds-lavender);
+    transition: transform var(--ds-t-xs) var(--ds-ease-out);
+}
+#send_form :is(#send_but, #mes_continue, #mes_impersonate, #options_button):hover { transform: translateY(-1px); color: var(--SmartThemeBodyColor); }
+/* ST shows the stop button with display: flex but does not centre its <i>; size it like the send button. */
+#send_form #mes_stop {
+    color: var(--ds-error);
+    border: 1px solid var(--ds-error);
+    width: var(--bottomFormBlockSize);
+    height: var(--bottomFormBlockSize);
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+    place-self: center;
+    font-size: var(--bottomFormIconSize);
+    line-height: 1;
+}
+#send_form #mes_stop > i { display: block; margin: 0; line-height: 1; font-size: .8em; }
+#send_form.no-connection { border-color: var(--ds-error); border-style: dashed; }
+#send_form.compact { padding: 4px 6px; gap: 2px; }
+#send_form.compact #send_textarea { padding-block: 6px; }
+#options, #extensionsMenu {
+    background-color: var(--SmartThemeBlurTintColor);
+    color: var(--SmartThemeBodyColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-panel);
+    padding: 8px;
+}
+#extensionsMenu .options-content { background: var(--SmartThemeBlurTintColor); }
+#extensionsMenuButton { color: var(--ds-lavender); }
+
+/* 8. top bar & drawers. No animation on openDrawer itself. */
+#top-bar {
+    background-color: var(--SmartThemeBlurTintColor);
+    background-image: var(--ds-grain);
+    border-bottom: 1px solid var(--SmartThemeBorderColor);
+}
+#top-settings-holder .drawer-icon {
+    opacity: 1;
+    color: var(--SmartThemeBodyColor);
+    border-radius: var(--ds-radius-field);
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    transition: transform var(--ds-t-xs) var(--ds-ease-out);
+}
+#top-settings-holder .drawer-icon:hover { color: var(--ds-lavender-hi); }
+#top-settings-holder .drawer-icon.openIcon { color: var(--ds-gold); }
+#top-settings-holder .drawer-icon.closedIcon { color: var(--SmartThemeBodyColor); }
+.drawer-content {
+    color: var(--SmartThemeBodyColor);
+    background-color: var(--SmartThemeBlurTintColor);
+    background-image: var(--ds-corner), var(--ds-grain);
+    background-position: 8px 8px, 0 0;
+    background-repeat: no-repeat, repeat;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: 0 0 var(--ds-radius-panel) var(--ds-radius-panel);
+    outline: 1px solid var(--ds-gold-rule);
+    outline-offset: -4px;
+    padding: 18px;
+    scrollbar-gutter: stable;
+}
+/* ST animates height 0 <-> auto; padding and borders must collapse too or a slab lingers. */
+.drawer-content { transition-property: height, display, padding, border-width; }
+.drawer-content.closedDrawer:not(.openDrawer) { padding-block: 0; border-block-width: 0; }
+@starting-style { .drawer-content.openDrawer { padding-block: 0; border-block-width: 0; } }
+.drawer-content.openDrawer > :not(#rm_ch_create_block, #rm_characters_block) { animation: ds-fade-in var(--ds-t-s) var(--ds-ease-out) 40ms backwards; }
+.drawer-content .inline-drawer { border-bottom: 1px solid var(--SmartThemeBorderColor); padding-block: 8px; }
+.drawer-content .inline-drawer-toggle { color: var(--SmartThemeBodyColor); min-height: 40px; }
+.drawer-content .inline-drawer-toggle:hover { color: var(--ds-lavender); }
+
+.drawer-content .menu_button:hover { transform:none; }
+#chat .mes .ch_name, #chat .mes .ch_name > .flex-container { min-width:0; flex-wrap:wrap; }
+#chat .mes .name_text { overflow-wrap:anywhere; }
+#chat .mes .mes_block { min-width:0; }
+/* 9. panels. Preserve MovingUI sizing and ST's list/grid layout. */
+:is(#left-nav-panel, #right-nav-panel, #rm_api_block, #AdvancedFormatting, #WorldInfo, #user-settings-block, #Backgrounds, #rm_extensions_block, #PersonaManagement) {
+    color: var(--SmartThemeBodyColor);
+    background-color: var(--SmartThemeBlurTintColor);
+}
+:is(#WorldInfo, #PersonaManagement, #AdvancedFormatting, #rm_extensions_block) textarea {
+    min-height: 8rem;
+    line-height: 1.6;
+    font-size: max(15px, var(--mainFontSize));
+}
+#rm_print_characters_block .character_select {
+    contain: layout style;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-message);
+    background-color: var(--SmartThemeChatTintColor);
+    padding: 10px;
+    margin-block: 6px;
+    min-width: 0;
+}
+#rm_print_characters_block .character_select:hover { border-color: var(--ds-lavender); }
+#rm_print_characters_block .character_select .ch_name {
+    font-family: var(--ds-title-font);
+    font-weight: 400;
+    color: var(--ds-gold);
+    font-size: 1.1em;
+    overflow-wrap: break-word;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#rm_print_characters_block .group_select {
+    background-color: var(--SmartThemeChatTintColor);
+    border: 1px dashed var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-message);
+    padding: 10px;
+}
+body.charListGrid #rm_print_characters_block .character_select { padding: 8px; }
+/* VERIFY: .tag is in local public/css/tags.css, absent from supplied map. */
+.drawer-content .tag {
+    border-radius: 999px;
+    border: 1px solid var(--SmartThemeBorderColor);
+    color: var(--SmartThemeBodyColor);
+    background-color: var(--SmartThemeChatTintColor);
+    padding: 4px 9px;
+    line-height: 1.5;
+}
+/* VERIFY: .world_entry and .world_entry_edit verified in public/index.html. */
+#WorldInfo .world_entry {
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-message);
+    background-color: var(--SmartThemeChatTintColor);
+    padding: 10px;
+    margin-block: 8px;
+}
+#Backgrounds .menu_button, #PersonaManagement .menu_button { border-radius: var(--ds-radius-field); }
+
+/* Long persona names must not impose their min-content width on the panel column. */
+#PersonaManagement .persona_management_right_column { min-width:0; max-width:100%; }
+#PersonaManagement #your_name { min-width:0; white-space:normal; overflow-wrap:anywhere; }
+body[data-generating="true"] #bg1::after { animation-play-state:paused; }
+/* 10. controls. Font Awesome glyph fonts remain untouched. */
+body .menu_button {
+    position: relative;
+    isolation: isolate;
+    background-color: var(--SmartThemeBlurTintColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-field);
+    color: var(--SmartThemeBodyColor);
+    padding: 7px 10px;
+    filter: none;
+    transition: transform var(--ds-t-xs) var(--ds-ease-out);
+}
+body .menu_button::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px var(--ds-lavender);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--ds-t-xs) ease;
+}
+body .menu_button:hover { color: var(--ds-lavender-hi); border-color: var(--ds-lavender); transform: translateY(-1px); }
+body .menu_button:hover::after { opacity: .65; }
+body .menu_button.active { color: var(--ds-gold); border-color: var(--ds-gold); }
+body .menu_button:disabled, body input:disabled, body select:disabled, body textarea:disabled {
+    color: var(--ds-disabled-fg);
+    cursor: not-allowed;
+    border-style: dashed;
+}
+/* v2.1: no #id inside :is() (kept specificity low); select2 search and range counters keep ST sizing */
+body :is(.text_pole, select, input:not([type='range'], [type='checkbox'], [type='radio']), textarea):not(.select2-search__field, .range-block-counter input) {
+    color: var(--SmartThemeBodyColor);
+    background-color: var(--SmartThemeChatTintColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-field);
+    padding: 8px 10px;
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+}
+body :is(input, textarea)::placeholder { color: var(--ds-muted); opacity: 1; }
+body select option { background-color: var(--ds-bg); color: var(--SmartThemeBodyColor); }
+body input:is([type='checkbox'], [type='radio']) { accent-color: var(--ds-lavender); }
+/* ST paints the whole input as the track, so a tall touch target became a fat bar.
+   Keep the hit area but draw a thin centred track as a background layer.
+   !important (with html body specificity): other extensions repaint range inputs globally
+   (seen as a full-height blue bar on phones); the theme's thin track must win.
+   :not(#dst_x) only adds id-level specificity, it matches every range input. */
+html body input[type='range']:not(#dst_x) {
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    accent-color: var(--ds-lavender);
+    height: 28px;
+    max-width: 100%;
+    background: linear-gradient(var(--SmartThemeBorderColor), var(--SmartThemeBorderColor)) center / 100% 4px no-repeat transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    filter: none;
+}
+html body input[type='range']:not(#dst_x):hover { filter: none; }
+html body input[type='range']:not(#dst_x)::-webkit-slider-runnable-track { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+html body input[type='range']:not(#dst_x)::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    cursor: ew-resize;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--ds-lavender) !important;
+    border: 2px solid var(--ds-bg) !important;
+    box-shadow: 0 0 0 1px var(--ds-lavender) !important;
+}
+html body input[type='range']:not(#dst_x)::-moz-range-track { background: transparent !important; border: 0; }
+html body input[type='range']:not(#dst_x)::-moz-range-progress { background: transparent !important; }
+html body input[type='range']:not(#dst_x)::-moz-range-thumb {
+    cursor: ew-resize;
+    width: 14px;
+    height: 14px;
+    background: var(--ds-lavender) !important;
+    border: 2px solid var(--ds-bg) !important;
+    box-shadow: 0 0 0 1px var(--ds-lavender) !important;
+}
+body .range-block { border-radius: var(--ds-radius-field); color: var(--SmartThemeBodyColor); }
+body .list-group {
+    background-color: var(--SmartThemeBlurTintColor);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-field);
+    padding: 4px;
+}
+body .list-group-item { color: var(--SmartThemeBodyColor); border-radius: 4px; padding: 9px 12px; }
+body .list-group-item:hover { color: var(--ds-lavender); background-color: var(--SmartThemeChatTintColor); }
+body ::-webkit-scrollbar { width: 9px; height: 9px; }
+body ::-webkit-scrollbar-track { background: var(--ds-bg); }
+body ::-webkit-scrollbar-thumb, body ::-webkit-scrollbar-thumb:vertical, body ::-webkit-scrollbar-thumb:horizontal { background-color: var(--SmartThemeBorderColor); border: 2px solid var(--ds-bg); border-radius: 9px; }
+body ::-webkit-scrollbar-thumb:vertical:hover { background-color: var(--ds-muted); }
+
+/* 11. popup & toasts. Replace ST's state animations, not bare dialog's. */
+dialog.popup {
+    color: var(--SmartThemeBodyColor);
+    background-color: var(--SmartThemeBlurTintColor);
+    background-image: var(--ds-corner), var(--ds-grain);
+    background-position: 8px 8px, 0 0;
+    background-repeat: no-repeat, repeat;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-panel);
+    outline: 1px solid var(--ds-gold-rule);
+    outline-offset: -4px;
+    max-width: min(92vw, 900px);
+    padding: 20px;
+}
+dialog.popup.transparent_dialogue_popup { background: transparent; border: none; outline: none; }
+.popup .popup-header { color: var(--ds-gold); padding-inline-start: 34px; background: var(--ds-seal) left center / 26px no-repeat; }
+.popup .popup-content { color: var(--SmartThemeBodyColor); line-height: 1.65; overflow-wrap: break-word; }
+.popup :is(.popup-input, .popup-inputs) { max-width: 100%; }
+.popup .popup-controls { gap: 10px; flex-wrap: wrap; }
+.popup .popup-button-ok { color: var(--SmartThemeBodyColor); background-color: var(--SmartThemeBlurTintColor); border-color: var(--ds-lavender); }
+.popup .popup-button-cancel { color: var(--SmartThemeBodyColor); background-color: var(--SmartThemeBlurTintColor); }
+.popup .popup-button-close { background: var(--SmartThemeBlurTintColor); border: 1px solid var(--SmartThemeBorderColor); color: var(--ds-error); min-width: 40px; min-height: 40px; display: flex; align-items: center; justify-content: center; top: 4px; right: 4px; }
+.popup::backdrop { background: rgba(11,10,18,.8); }
+/* ST closes the dialog on the first animationend (the backdrop's bubbles too): keep both on ST's speed. */
+.popup[opening] { animation: ds-popup-in var(--popup-animation-speed, 220ms) var(--ds-ease-out); }
+.popup[opening]::backdrop { animation: ds-fade-in var(--popup-animation-speed, 220ms) ease; }
+.popup[closing] { animation: ds-popup-out var(--popup-animation-speed, 180ms) var(--ds-ease-in) forwards; }
+.popup[closing]::backdrop { animation: ds-fade-out var(--popup-animation-speed, 180ms) var(--ds-ease-in) forwards; }
+body #toast-container > div {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: min(300px, calc(100vw - 20px));
+    background-color: var(--SmartThemeBlurTintColor);
+    color: var(--SmartThemeBodyColor);
+    opacity: 1;
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-inline-start: 3px solid var(--ds-info);
+    border-radius: var(--ds-radius-message);
+    box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    animation: ds-toast-in var(--ds-t-m) var(--ds-ease-out) backwards;
+}
+body #toast-container > .toast-success { background-color: var(--SmartThemeBlurTintColor); color: var(--SmartThemeBodyColor); border-inline-start-color: var(--ds-success); }
+body #toast-container > .toast-error { background-color: var(--SmartThemeBlurTintColor); color: var(--SmartThemeBodyColor); border-inline-start-color: var(--ds-error); }
+body #toast-container > .toast-warning { background-color: var(--SmartThemeBlurTintColor); color: var(--SmartThemeBodyColor); border-inline-start-color: var(--ds-warning); }
+body #toast-container > .toast-info { background-color: var(--SmartThemeBlurTintColor); color: var(--SmartThemeBodyColor); border-inline-start-color: var(--ds-info); }
+
+/* 12. motion. Transform and opacity only. */
+@keyframes ds-spirits { from { transform: translate3d(1%,1.5%,0); } to { transform: translate3d(-1.5%,-1%,0); } }
+@keyframes ds-mes-in { from { opacity: 0; transform: translate3d(0,4px,0); } to { opacity: 1; transform: none; } }
+@keyframes ds-generate { 0%,100% { opacity: .3; } 50% { opacity: .9; } }
+@keyframes ds-rewind-hand { from { transform: rotate(0); } to { transform: rotate(-360deg); } }
+@keyframes ds-popup-in { from { opacity: 0; transform: translate3d(0,4px,0) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes ds-popup-out { to { opacity: 0; transform: scale(.98); } }
+@keyframes ds-fade-in { from { opacity: 0; } to { opacity: 1; } }
+/* Transform only: toastr's jQuery fadeIn owns opacity; animating it here made toasts blink. */
+@keyframes ds-toast-in { from { transform: translate3d(0,-8px,0); } to { transform: none; } }
+
+@keyframes ds-fade-out { to { opacity: 0; } }
+@keyframes ds-toast-in-up { from { transform: translate3d(0,8px,0); } to { transform: none; } }
+body #toast-container[class*="toast-bottom"] > div { animation-name: ds-toast-in-up; }
+
+/* 13. reduced motion. !important: override both theme and native ST
+   animations regardless of state-selector specificity. User setting unchanged. */
+body.reduced-motion #bg1::before, body.reduced-motion #bg1::after,
+body.reduced-motion #chat .mes, body.reduced-motion #chat .mes::before,
+body.reduced-motion #chat .mes::after, body.reduced-motion #chat .swipes-counter::after,
+body.reduced-motion .drawer-content.openDrawer > *,
+body.reduced-motion .popup[opening], body.reduced-motion .popup[closing],
+body.reduced-motion .popup[opening]::backdrop, body.reduced-motion .popup[closing]::backdrop, body.reduced-motion #chat .mes.ds-new,
+body.reduced-motion #top-settings-holder .drawer-icon::before,
+body.reduced-motion dialog.popup::before,
+body.reduced-motion #send_form #mes_stop::after,
+body.reduced-motion #toast-container > div::after,
+body.reduced-motion #chat .mes > .mesAvatarWrapper::after,
+body.reduced-motion #send_but,
+body.reduced-motion #mes_continue,
+body.reduced-motion #options_button,
+body.reduced-motion .popup-button-close,
+body.reduced-motion #toast-container > div {
+    animation: none !important;
+}
+body.reduced-motion :is(.menu_button, .drawer-icon, .swipe_left, .swipe_right, #send_but, #mes_continue, #mes_impersonate, #options_button):hover { transform: none; }
+/* !important: native ST and theme transitions must not re-enable motion. */
+body.reduced-motion *, body.reduced-motion *::before, body.reduced-motion *::after { transition-duration: 0ms !important; }
+@media (prefers-reduced-motion: reduce) {
+    /* !important: OS preference overrides all state-specific animations. */
+    #bg1::before, #bg1::after, #chat .mes, #chat .mes::before, #chat .mes::after,
+    #chat .swipes-counter::after, .drawer-content.openDrawer > *,
+    .popup[opening], .popup[closing], .popup[opening]::backdrop, .popup[closing]::backdrop, #chat .mes.ds-new,
+#top-settings-holder .drawer-icon::before,
+dialog.popup::before,
+#send_form #mes_stop::after,
+#toast-container > div::after,
+#chat .mes > .mesAvatarWrapper::after,
+#send_but,
+#mes_continue,
+#options_button,
+.popup-button-close,
+body #toast-container > div { animation: none !important; }
+    /* !important: override native ST transition durations as well. */
+    body *, body *::before, body *::after { transition-duration: 0ms !important; }
+    body :is(.menu_button, .drawer-icon, .swipe_left, .swipe_right, #send_but, #mes_continue, #mes_impersonate, #options_button):hover { transform: none; }
+}
+
+body.reduced-motion #bg1::before, body.reduced-motion #bg1::after { will-change: auto; }
+@media (prefers-reduced-motion: reduce) {
+    #bg1::before, #bg1::after { will-change: auto; }
+}
+
+/* Static semantic state survives both motion switches. */
+body.reduced-motion[data-generating="true"] #chat .last_mes:not([is_user="true"])::before { opacity:.8; }
+body.reduced-motion #chat .mes :is(.swipe_left,.swipe_right):active { transform:none; }
+body.no-blur #bg1::after { animation:none; will-change:auto; }
+body.ds-blur-active #bg1::after { animation:none; will-change:auto; }
+body.no-blur[data-generating="true"] #chat .last_mes::before { animation:none; opacity:.8; }
+@media (prefers-reduced-motion:reduce) {
+ body[data-generating="true"] #chat .last_mes:not([is_user="true"])::before { opacity:.8; }
+ body #chat .mes :is(.swipe_left,.swipe_right):active { transform:none; }
+}
+@media (max-width:1000px),(pointer:coarse) {
+ #bg1::before,#bg1::after { animation:none !important; will-change:auto; }
+ #chat .mes.ds-new { animation-name:ds-fade-in; animation-duration:var(--ds-t-s); }
+ #chat .mes.last_mes.ds-rewinding::after { animation:none; }
+}
+/* 14. mobile. Keep ST's full-width important rules and MovingUI intact. */
+@media screen and (max-width: 1000px) {
+    #chat { padding-inline: 6px; border-inline: 0; }
+    #chat .mes { margin-block: 8px; padding: 14px 10px; }
+    #send_form { border-radius: 10px; }
+    .drawer-content { padding: 14px; border-radius: 0 0 10px 10px; box-sizing: border-box; }
+    /* Extensions add top-bar icons (Horae etc.): equal cells, vertically centred.
+       When the cells would get narrower than 40px, the bar becomes two equal rows. */
+    /* ST sizes #top-bar from the bottom form; match the icon row (and the two-row case). */
+    #top-bar { height: var(--topBarBlockSize); }
+    /* ST hard-codes phone panel heights as 100dvh - 45px; follow the real (1- or 2-row) top bar. */
+    .drawer-content { max-height: calc(100dvh - var(--topBarBlockSize) - 5px); }
+    #right-nav-panel, #left-nav-panel, #floatingPrompt, #cfgConfig, #logprobsViewer, #movingDivs > div { height: calc(100dvh - var(--topBarBlockSize) - 5px); }
+    #top-settings-holder { --ds-tb-n: 9; --ds-tb-cols: var(--ds-tb-n); display: grid; grid-template-columns: repeat(var(--ds-tb-cols), minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); align-items: stretch; overflow: hidden; box-sizing: border-box; padding-inline: 0; }
+    #top-settings-holder:has(> :nth-child(10 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 10; }
+    #top-settings-holder:has(> :nth-child(11 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 11; }
+    #top-settings-holder:has(> :nth-child(12 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 12; }
+    #top-settings-holder:has(> :nth-child(13 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 13; }
+    #top-settings-holder:has(> :nth-child(14 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 14; }
+    #top-settings-holder:has(> :nth-child(15 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 15; }
+    #top-settings-holder:has(> :nth-child(16 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 16; }
+    #top-settings-holder:has(> :nth-child(17 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 17; }
+    #top-settings-holder:has(> :nth-child(18 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 18; }
+    #top-settings-holder:has(> :nth-child(19 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 19; }
+    #top-settings-holder:has(> :nth-child(20 of .drawer:not([style*="display: none"]))) { --ds-tb-n: 20; }
+    #top-settings-holder > .drawer { min-width: 0; height: 100%; display: flex; align-items: center; justify-content: center; }
+    #top-settings-holder > .drawer > .drawer-toggle { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; min-width: 0; margin: 0; padding: 0; }
+    #top-settings-holder > .drawer > .drawer-toggle > .drawer-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        height: 100%;
+        min-height: 0;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        font-size: min(var(--topBarIconSize), calc(100vw / var(--ds-tb-cols) * .7), calc(var(--topBarBlockSize) / var(--ds-tb-rows) * .7));
+    }
+}
+/* 14a. top bar: two rows when n cells would be narrower than 40px (n*40 > viewport width). */
+@media screen and (max-width: 399px) {
+    :root:has(#top-settings-holder > :nth-child(10 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(10 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 5; }
+}
+@media screen and (max-width: 439px) {
+    :root:has(#top-settings-holder > :nth-child(11 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(11 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 6; }
+}
+@media screen and (max-width: 479px) {
+    :root:has(#top-settings-holder > :nth-child(12 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(12 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 6; }
+}
+@media screen and (max-width: 519px) {
+    :root:has(#top-settings-holder > :nth-child(13 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(13 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 7; }
+}
+@media screen and (max-width: 559px) {
+    :root:has(#top-settings-holder > :nth-child(14 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(14 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 7; }
+}
+@media screen and (max-width: 599px) {
+    :root:has(#top-settings-holder > :nth-child(15 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(15 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 8; }
+}
+@media screen and (max-width: 639px) {
+    :root:has(#top-settings-holder > :nth-child(16 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(16 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 8; }
+}
+@media screen and (max-width: 679px) {
+    :root:has(#top-settings-holder > :nth-child(17 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(17 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 9; }
+}
+@media screen and (max-width: 719px) {
+    :root:has(#top-settings-holder > :nth-child(18 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(18 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 9; }
+}
+@media screen and (max-width: 759px) {
+    :root:has(#top-settings-holder > :nth-child(19 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(19 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 10; }
+}
+@media screen and (max-width: 799px) {
+    :root:has(#top-settings-holder > :nth-child(20 of .drawer:not([style*="display: none"]))) { --ds-tb-rows: 2; }
+    #top-settings-holder:has(> :nth-child(20 of .drawer:not([style*="display: none"]))) { --ds-tb-cols: 10; }
+}
+@media screen and (max-width: 1000px) and (orientation: portrait) {
+    /* !important: ST sets an inline background-image; this mobile override
+       intentionally disables the Backgrounds picker in portrait mode. */
+    #bg1 { background-image: url('backgrounds/aishiteru_bg_mobile.webp') !important; background-size: cover !important; background-position: center top !important; }
+}
+@media screen and (max-width: 768px) {
+    /* !important: an enabled optional switch must not restore phone motion. */
+    #bg1::before, #bg1::after { animation: none !important; will-change: auto; }
+    #chat .mes .mes_text { max-width: 100%; }
+    #send_form { flex-wrap: wrap; }
+    .drawer-content input[type='range'] { height: 36px; }
+    .drawer-content select { min-height: 40px; }
+    .drawer-content label:has(> input:is([type='checkbox'], [type='radio'])) { min-height: 40px; display: flex; align-items: center; gap: 8px; }
+    #send_textarea { flex: 1 1 55%; max-width: 100%; }
+    #rightSendForm { flex-wrap: wrap; justify-content: flex-end; }
+    .popup .popup-content { max-width: 100%; }
+    body #toast-container { max-width: calc(100vw - 20px); }
+}
+@media screen and (max-width: 450px) {
+    /* Compact phone composer: controls and input share a row; typed text alone grows it. */
+    #send_form { padding:5px; border-radius:14px; outline-color:rgba(217,178,111,.08); }
+    #send_form #nonQRFormItems { display:grid; grid-template-columns:auto minmax(45%,1fr) auto; align-items:center; gap:2px; }
+    #send_form #leftSendForm { grid-column:1; width:auto; gap:0; min-width:0; flex-wrap:wrap; }
+    #send_form #send_textarea { grid-column:2; width:100%; min-height:40px; max-height:min(160px,28dvh); padding:8px 4px; margin:0; box-sizing:border-box; font-size:max(16px,calc(var(--mainFontSize) * 1.05)); line-height:1.4; }
+    #send_form #send_textarea::placeholder { font-family:var(--mainFontFamily); font-size:.82em; }
+    #send_form #rightSendForm, #send_form.compact #rightSendForm { grid-column:3; width:auto; flex-basis:auto; flex-wrap:wrap; justify-content:flex-end; min-width:0; gap:0; }
+    #send_form :is(#options_button,#extensionsMenuButton,#send_but,#mes_stop) { font-size:22px; }
+    #send_form::after { background-size:160px 30px; }
+    #send_form:focus-within::after { opacity:.18; }
+    /* The mobile artwork is visible between cards; the reading column stays dark. */
+    #chat { background:transparent; padding-inline:10px; }
+    #chat .mes { background-color:rgba(26,23,38,.88); margin-block:12px; }
+    #chat .mes[is_user="true"] { background-color:rgba(28,26,43,.90); }
+    #chat .mes { padding: 12px 8px; }
+    #chat .mes .name_text { font-size: 1.15em; }
+    #chat .mes .mes_buttons { gap: 0; flex-wrap: wrap; }
+    #send_textarea { flex-basis: calc(100% - 56px); }
+    #send_form #send_textarea { flex-basis: calc(100% - 56px); }
+    #rightSendForm { flex-basis: 100%; }
+    #send_form.compact #rightSendForm { flex-basis: 100%; }
+    dialog.popup { max-width: calc(100vw - 20px); padding: 16px 12px; box-sizing: border-box; }
+}
+@media screen and (max-width: 768px) {
+    /* Welcome screen: 40px touch targets and wide fonts overflowed ST's single-row header. */
+    .welcomePanel { padding: 8px; }
+    .welcomePanel .welcomeHeaderTitle { flex-wrap: nowrap; }
+    .welcomePanel .welcomeHeaderVersionDisplay { font-size: 1.1em; min-width: 0; overflow-wrap: anywhere; }
+    .welcomePanel .welcomeHeader { flex-wrap: wrap; justify-content: space-between; gap: 6px; }
+    .welcomePanel .recentChatsTitle { flex: 1 1 auto; white-space: nowrap; font-size: 1.05em; }
+    .welcomePanel .welcomeShortcuts { flex: 0 1 auto; justify-content: flex-end; }
+    .welcomePanel .welcomeShortcuts .menu_button { min-width: 36px; min-height: 36px; padding: 5px 8px; margin: 0; }
+    /* The welcome message has no swipes: do not reserve their 86px. */
+    #chat .mes.last_mes[type="assistant_message"] { padding-bottom: 14px; }
+    body.hideChatAvatars #chat .mes.last_mes[type="assistant_message"] { padding-bottom: 14px !important; }
+}
+/* 15. Welcome screen: recent chats as compact cards in the message style.
+   Name and date on top, last message below, stats and quiet actions share the bottom row. */
+.welcomeRecent .recentChatList { gap: 8px; }
+.welcomeRecent .recentChatList .recentChat {
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px; /* clears the frame's corner hands, as on messages */
+    background-color: rgba(26,23,38,.82);
+    border: 1px solid var(--SmartThemeBorderColor);
+    border-radius: var(--ds-radius-message);
+    transition: background-color var(--ds-t-s) var(--ds-ease-out), border-color var(--ds-t-s) var(--ds-ease-out);
+}
+.welcomeRecent .recentChatList .recentChat:hover { background-color: rgba(38,32,58,.9); border-color: var(--ds-lavender); }
+.welcomeRecent .recentChatList .recentChat .recentChatInfo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: "name date" "msg msg" "stats actions";
+    column-gap: 8px;
+    row-gap: 2px;
+    min-width: 0;
+    align-self: stretch;
+}
+.welcomeRecent .recentChatList .recentChat :is(.chatNameContainer, .chatMessageContainer) { display: contents; }
+.welcomeRecent .recentChatList .recentChat .chatName { grid-area: name; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; align-self: center; }
+.welcomeRecent .recentChatList .recentChat .chatName .characterName { font-family: var(--ds-title-font); font-weight: 400; font-size: 1.1em; color: var(--ds-gold); }
+.welcomeRecent .recentChatList .recentChat .chatName > span { color: var(--ds-muted); font-size: .85em; }
+.welcomeRecent .recentChatList .recentChat .chatDate { grid-area: date; align-self: center; color: var(--ds-muted); white-space: nowrap; }
+.welcomeRecent .recentChatList .recentChat .chatMessage { grid-area: msg; font-family: var(--ds-reading-font); opacity: .85; }
+.welcomeRecent .recentChatList .recentChat .chatStats { grid-area: stats; align-self: center; display: flex; align-items: center; gap: 8px; color: var(--ds-muted); }
+.welcomeRecent .recentChatList .recentChat .chatActions { grid-area: actions; align-self: center; gap: 2px; justify-content: flex-end; }
+body .welcomeRecent .recentChatList .recentChat .chatActions button {
+    min-width: 32px;
+    min-height: 32px;
+    margin: 0;
+    padding: 4px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    color: var(--ds-muted);
+}
+body .welcomeRecent .recentChatList .recentChat .chatActions button:is(:hover, :focus-visible) { color: var(--ds-lavender-hi); background: var(--ds-lavender-lo); }
+body .welcomeRecent .recentChatList .recentChat .chatActions .deleteChat:is(:hover, :focus-visible) { color: var(--ds-crimson-text); background: var(--ds-crimson-lo); }
+@media (hover: none) {
+    body .welcomeRecent .recentChatList .recentChat .chatActions button { min-width: 40px; min-height: 40px; }
+}
+@media (max-width: 450px) { .welcomeRecent .recentChatList .recentChat { padding: 10px 12px; gap: 10px; } }
+/* 16. Third-party top-bar icons (Horae etc.) keep their Font Awesome glyph, tinted to the theme. */
+#top-settings-holder > .drawer:not(#ai-config-button, #sys-settings-button, #advanced-formatting-button, #WI-SP-button, #user-settings-button, #backgrounds-button, #extensions-settings-button, #persona-management-button, #rightNavHolder) .drawer-icon { color: var(--ds-lavender-hi); filter: drop-shadow(0 0 3px rgba(168,139,255,.35)); }
+#top-settings-holder > .drawer:not(#ai-config-button, #sys-settings-button, #advanced-formatting-button, #WI-SP-button, #user-settings-button, #backgrounds-button, #extensions-settings-button, #persona-management-button, #rightNavHolder) .drawer-icon.openIcon { color: var(--ds-gold); }
+/* Compatibility: "Chat Top Bar" extension (#extensionTopBar). It has a fixed-height, wrapping row;
+   the touch rule below gives its icons min 40px (ST adds .interactable), so they wrapped and
+   spilled under the top bar. Keep its icons compact and let the row grow instead. */
+body #extensionTopBar {
+    height: auto;
+    min-height: var(--bottomFormBlockSize);
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 6px;
+    box-sizing: border-box;
+}
+body #extensionTopBar > :is(i, .interactable) {
+    min-width: 32px;
+    min-height: 32px;
+    padding: 0;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body #extensionTopBar :is(#extensionTopBarChatName, #extensionTopBarSearchInput) {
+    min-width: 0;
+    flex: 1 1 60px;
+    width: auto;
+    padding-block: 4px;
+}
+/* Compatibility: Manage extensions popup. Long (e.g. Russian) toolbar labels must wrap, not overlap,
+   even when another extension forces white-space: nowrap on .menu_button. */
+body .extensions_toolbar { flex-wrap: wrap; }
+body .extensions_toolbar > .menu_button { white-space: normal; flex: 1 1 auto; text-align: center; min-width: 0; }
+@media screen and (max-width: 1000px) and (orientation: landscape) {
+    .drawer-content { max-height: 88dvh; overflow-y: auto; }
+    #send_textarea { max-height: 28dvh; }
+    dialog.popup { max-height: 90dvh; }
+}
+@media (hover: none) {
+    #chat .mes .mes_buttons { opacity: 1; }
+    #chat .mes :is(.mes_button, .mes_edit, .extraMesButtonsHint, .mes_edit_buttons > *) { min-width: 40px; min-height: 40px; padding: 10px; box-sizing: border-box; }
+    /* 40px targets don't fit 9+ actions in one row; ST's nowrap + overflow:hidden then hides the first ones. Wrap instead. */
+    #chat .mes .extraMesButtons { flex-wrap: wrap; justify-content: flex-end; gap: 0; }
+    body .menu_button, body .interactable, .popup .popup-controls > *, .drawer-content .inline-drawer-toggle { min-width: 40px; min-height: 40px; box-sizing: border-box; }
+    body :is(.menu_button, .drawer-icon, .swipe_left, .swipe_right, #send_but, #mes_continue, #mes_impersonate, #options_button):hover { transform: none; }
+}

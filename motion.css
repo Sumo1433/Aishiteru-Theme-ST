@@ -1,0 +1,69 @@
+/* New effects. MOTION-LIST: sync with theme sections 0.1 and 13. */
+/* Twelve native-aspect ImageGen frames. index.js adds two small corner windows (.ds-fx) to the
+   message and removes them afterwards. Each window only repaints its own 175x175px square per frame:
+   no will-change, no transform/opacity animation, so no composited layer is created. (A composited
+   layer under the text forces the whole message text into its own layer: phones stalled before and
+   after every effect. A message-sized masked layer repainted per frame lagged during it.)
+   The strips fade out in their last frames; text paints above the art. */
+body.ds-theme-active #chat .mes[is_user="true"].ds-new { animation:none; }
+body.ds-theme-active #chat .mes { isolation:isolate; }
+body.ds-theme-active #chat .mes::after { background:none; }
+body.ds-theme-active #chat .mes > .ds-fx {
+ --ds-motion-size:175px;
+ position:absolute; width:var(--ds-motion-size); height:var(--ds-motion-size);
+ contain:strict; pointer-events:none; z-index:-1; opacity:.85;
+ background:no-repeat 0 0 / var(--ds-motion-size) calc(12 * var(--ds-motion-size));
+ animation:ds-art-frames 500ms steps(12,end) both;
+}
+body.ds-theme-active #chat .mes > .ds-fx-tl { left:0; top:0; }
+body.ds-theme-active #chat .mes > .ds-fx-br { right:0; bottom:0; }
+body.ds-theme-active #chat .mes > .ds-fx-send.ds-fx-tl { background-image:url('assets/motion/ds-send-tl-sprite.webp'); }
+body.ds-theme-active #chat .mes > .ds-fx-send.ds-fx-br { background-image:url('assets/motion/ds-send-br-sprite.webp'); }
+body.ds-theme-active #chat .mes > .ds-fx-swipe.ds-fx-tl { background-image:url('assets/motion/ds-swipe-tl-sprite.webp'); }
+body.ds-theme-active #chat .mes > .ds-fx-swipe.ds-fx-br { background-image:url('assets/motion/ds-swipe-br-sprite.webp'); }
+@keyframes ds-art-frames { from { background-position:0 0; } to { background-position:0 calc(-12 * var(--ds-motion-size)); } }
+/* Phones play the same effect, smaller. */
+@media(max-width:768px) { body.ds-theme-active #chat .mes > .ds-fx { --ds-motion-size:160px; } }
+@media (prefers-reduced-motion:reduce),(forced-colors:active) { body.ds-theme-active #chat .mes > .ds-fx { display:none; } }
+body.ds-theme-active.reduced-motion #chat .mes > .ds-fx { display:none; }
+body.ds-theme-active #send_form #mes_stop { position:relative; color:var(--ds-crimson-text); border-color:var(--ds-crimson-text); }
+body.ds-theme-active #send_form #mes_stop::after { content:''; position:absolute; width:1em; height:1em; left:calc(50% - .5em); top:calc(50% - .5em); border-radius:50%; background:linear-gradient(currentColor,currentColor) center top / 1px 25% no-repeat; pointer-events:none; }
+body.ds-theme-active dialog.popup:not(.transparent_dialogue_popup)::before { content:''; position:absolute; width:28px; height:28px; left:6px; top:6px; background:url('assets/ornaments/ds-seal.webp') center / contain no-repeat; opacity:.4; pointer-events:none; }
+body.ds-theme-active #toast-container > div::after { content:''; position:absolute; right:8px; bottom:8px; width:18px; height:18px; background:url('assets/ornaments/ds-seal.webp') center / contain no-repeat; opacity:.55; pointer-events:none; }
+@media (prefers-reduced-motion:no-preference) {
+ /* Match ST lifecycle speed: pseudo animationend bubbles to its dialog listener. */
+ body.ds-theme-active:not(.reduced-motion) dialog.popup[opening]::before { animation:ds-ornament var(--popup-animation-speed,220ms) var(--ds-ease-out); }
+ body.ds-theme-active:not(.reduced-motion):not(.no-blur) #send_form #mes_stop::after { animation:ds-clock 6s steps(12) infinite; }
+ body.ds-theme-active:not(.reduced-motion) #chat .mes .swipe_left:active { transform:rotate(-25deg) scale(.94); }
+ body.ds-theme-active:not(.reduced-motion) #chat .mes .swipe_right:active { transform:scale(.94); }
+ body.ds-theme-active:not(.reduced-motion) #toast-container > div::after { animation:ds-stamp 260ms var(--ds-ease-stamp) 80ms backwards; }
+ body.ds-theme-active:not(.reduced-motion) :is(#send_but,#mes_continue,#options_button,.popup-button-close):focus-visible { transition:transform var(--ds-t-xs) var(--ds-ease-out),outline-offset var(--ds-t-xs) var(--ds-ease-out); animation:ds-focus 90ms var(--ds-ease-out); }
+ @media (min-width:1001px) and (pointer:fine) { body.ds-theme-active:not(.reduced-motion)[data-generating="true"] #chat .mes.last_mes > .mesAvatarWrapper::after { animation:ds-tendril var(--ds-t-l) var(--ds-ease-out); } }
+}
+@keyframes ds-tick { 0%,100% { transform:rotate(0); } 35% { transform:rotate(-10deg); } }
+@keyframes ds-ornament { from { opacity:0; transform:scale(.85); } to { opacity:.4; transform:none; } }
+@keyframes ds-clock { to { transform:rotate(360deg); } }
+@keyframes ds-stamp { from { opacity:0; transform:scale(1.5) rotate(-20deg); } to { opacity:.55; transform:none; } }
+@keyframes ds-focus { from { outline-offset:6px; } to { outline-offset:3px; } }
+@keyframes ds-tendril { from { opacity:0; } to { opacity:.35; } }
+@media (max-width:1000px),(pointer:coarse) { body.ds-theme-active #top-settings-holder .drawer-icon::before { animation:none !important; } }
+body.ds-theme-active.reduced-motion :is(#mes_stop,dialog.popup,#toast-container > div)::after,
+body.ds-theme-active.reduced-motion dialog.popup::before,
+body.ds-theme-active.reduced-motion #top-settings-holder .drawer-icon::before,
+body.ds-theme-active.reduced-motion :is(#send_but,#mes_continue,#options_button,.popup-button-close) { animation:none !important; }
+body.ds-theme-active.reduced-motion #chat .mes :is(.swipe_left,.swipe_right):active { transform:none; }
+@media (prefers-reduced-motion:reduce) {
+ body.ds-theme-active :is(#mes_stop,dialog.popup,#toast-container > div)::after,
+ body.ds-theme-active dialog.popup::before,
+ body.ds-theme-active #top-settings-holder .drawer-icon::before,
+ body.ds-theme-active :is(#send_but,#mes_continue,#options_button,.popup-button-close) { animation:none !important; }
+ body.ds-theme-active #chat .mes :is(.swipe_left,.swipe_right):active { transform:none; }
+}
+@media (forced-colors:active) { body.ds-theme-active dialog.popup::before,body.ds-theme-active #toast-container > div::after { content:none; } }
+@media (forced-colors:active) {
+ body.ds-theme-active #send_form #mes_stop::after { background:linear-gradient(CanvasText,CanvasText) center top / 1px 25% no-repeat; forced-color-adjust:none; }
+}
+
+@media (prefers-reduced-motion:no-preference) and (hover:hover) {
+body.ds-theme-active:not(.reduced-motion) #top-settings-holder :is(#leftNavDrawerIcon,#API-status-top.fa-plug,#API-status-top.fa-plug-circle-exclamation,#advanced-formatting-button .drawer-icon,#WIDrawerIcon,#user-settings-button .drawer-icon,#backgrounds-button .drawer-icon,#extensions-settings-button .drawer-icon,#persona-management-button .drawer-icon,#rightNavDrawerIcon):hover::before { animation:ds-tick 220ms var(--ds-ease-out); }
+}
