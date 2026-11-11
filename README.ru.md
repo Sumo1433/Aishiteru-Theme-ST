@@ -1,4 +1,4 @@
-[English](README.md) · **Русский**
+<p align="center"><a href="README.md">English</a> · <strong>Русский</strong></p>
 
 <p align="center"><img src="docs/images/banner.webp" alt="Aishiteru" width="100%"></p>
 
@@ -8,23 +8,29 @@
 
 <p align="center"><img src="docs/images/badges.webp" alt="SillyTavern 1.19+ · Version 1.0.0 · PC | phone" width="410"></p>
 
+<p align="center"><a href="#установка">Установка</a> · <a href="#что-внутри">Что внутри</a> · <a href="#анимации">Анимации</a> · <a href="#совместимость">Совместимость</a></p>
+
 Это моя первая тема. Делал её в основном для себя, под свои чаты, а потом решил поделиться.
 
 <p align="center"><img src="docs/images/devices.webp" alt="PC and phone" width="100%"></p>
 
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
+
 ## Что внутри
 
-### Иконки
-51 собственная иконка на 64 кнопки SillyTavern.
+<table>
+<tr>
+<td width="50%" valign="top"><h3>Иконки</h3><p>51 собственная иконка на 64 кнопки SillyTavern.</p></td>
+<td width="50%" valign="top"><h3>Сообщения</h3><p>Рамки сообщений с теневыми руками по углам. У аватарок тоже рамки с руками.</p></td>
+</tr>
+</table>
 
-### Сообщения
-Рамки сообщений с теневыми руками по углам. У аватарок тоже рамки с руками.
-
-<p align="center">
+<details>
+<summary>Чат на ПК</summary>
 
 <img src="docs/images/pc-chat.webp" alt="Chat on PC" width="100%">
 
-</p>
+</details>
 
 ### Украшенный блок размышлений
 Серебряно-золотые застёжки по углам, орнамент под заголовком, мысли курсивом.
@@ -66,11 +72,14 @@
 ### Телефон
 Для телефона своя раскладка. Строка ввода компактная. Если расширения накидали много кнопок в верхнюю панель (Horae и похожие), она переносится в два ровных ряда. Кнопки сообщений тоже переносятся, а не прячутся.
 
-<p align="center">
+<details>
+<summary>Скриншот на телефоне</summary>
 
-<img src="docs/images/phone-chat.webp" alt="Phone" width="360">
+<p align="center"><img src="docs/images/phone-chat.webp" alt="Phone" width="360"></p>
 
-</p>
+</details>
+
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
 
 ## Установка
 
@@ -92,6 +101,8 @@
 
 </details>
 
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
+
 ## Совместимость
 
 Проверял с:
@@ -101,12 +112,17 @@
 
 Если с каким-то другим расширением что-то поехало, напиши мне.
 
-## Полезно знать
+<details>
+<summary>Полезно знать</summary>
 
 - **Без анимаций.** Вся анимация отключается, если включить Reduced Motion в SillyTavern или уменьшение движения в настройках системы.
 - **Высокая контрастность.** В режиме принудительных цветов всё остаётся рабочим. Контраст текста я тоже проверял.
 - **Шрифты.** PT Serif для текста, Prata для имён, Manrope для интерфейса, JetBrains Mono для кода. Грузятся с Google Fonts. Если не загрузились, будут системные.
 - **Телефон.** Всё, что выше, работает и на телефоне, анимации тоже.
+
+</details>
+
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
 
 ## Фанатский проект
 

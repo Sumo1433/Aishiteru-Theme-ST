@@ -1,4 +1,4 @@
-**English** · [Русский](README.ru.md)
+<p align="center"><strong>English</strong> · <a href="README.ru.md">Русский</a></p>
 
 <p align="center"><img src="docs/images/banner.webp" alt="Aishiteru" width="100%"></p>
 
@@ -8,26 +8,32 @@
 
 <p align="center"><img src="docs/images/badges.webp" alt="SillyTavern 1.19+ · Version 1.0.0 · PC | phone" width="410"></p>
 
-This is my first theme. I made it mostly for myself, for my own chats, and at some point I decided to share it. The name comes from "Aishiteru" (愛してる, "I love you"), the words Satella, the Witch of Envy, keeps whispering to Subaru. So the theme is tender and a bit frightening at the same time: shadow hands in the corners, the Gospel, time rolling back.
+<p align="center"><a href="#install">Install</a> · <a href="#whats-inside">What's inside</a> · <a href="#animations">Animations</a> · <a href="#compatibility">Compatibility</a></p>
+
+This is my first theme. I made it mostly for myself, for my own chats, and at some point I decided to share it.
 
 <p align="center"><img src="docs/images/devices.webp" alt="PC and phone" width="100%"></p>
 
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
+
 ## What's inside
 
-### Icons
-51 icons of my own for 64 SillyTavern buttons. Black silver and lavender, with Satella's shadow hands. Red only for stop and delete. Other extensions keep their own icons, just tinted to match.
+<table>
+<tr>
+<td width="50%" valign="top"><h3>Icons</h3><p>51 icons of my own for 64 SillyTavern buttons.</p></td>
+<td width="50%" valign="top"><h3>Messages</h3><p>Message frames with shadow hands at the corners. Avatars get frames with hands too.</p></td>
+</tr>
+</table>
 
-### Messages
-Message frames with shadow hands at the corners. Avatars get frames with hands too.
-
-<p align="center">
+<details>
+<summary>Chat on PC</summary>
 
 <img src="docs/images/pc-chat.webp" alt="Chat on PC" width="100%">
 
-</p>
+</details>
 
-### Thoughts as a page of the Gospel
-The reasoning block looks like a page from the Gospel: silver and gold clasps at the corners, an ornament under the title, thoughts in italic.
+### Decorated reasoning block
+Silver and gold clasps at the corners, an ornament under the title, thoughts in italic.
 
 <p align="center">
 
@@ -66,11 +72,14 @@ For PC (1920x1080) and phone (1080x2340). Darkness, shadow hands reaching toward
 ### Phone
 The phone has its own layout. The input row is compact. When extensions add a lot of buttons to the top bar (Horae and the like), it wraps into two even rows. Message buttons wrap instead of hiding.
 
-<p align="center">
+<details>
+<summary>Phone screenshot</summary>
 
-<img src="docs/images/phone-chat.webp" alt="Phone" width="360">
+<p align="center"><img src="docs/images/phone-chat.webp" alt="Phone" width="360"></p>
 
-</p>
+</details>
+
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
 
 ## Install
 
@@ -92,6 +101,8 @@ When I update the extension, the installed theme and backgrounds update by thems
 
 </details>
 
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
+
 ## Compatibility
 
 Checked with:
@@ -101,12 +112,17 @@ Checked with:
 
 If something looks broken with another extension, write to me.
 
-## Good to know
+<details>
+<summary>Good to know</summary>
 
 - **Reduced motion.** All animations turn off if you enable Reduced Motion in SillyTavern or in your system settings.
 - **High contrast.** In forced colors mode everything stays usable. I also checked text contrast.
 - **Fonts.** PT Serif for reading, Prata for names, Manrope for the interface, JetBrains Mono for code. They load from Google Fonts. If they don't load, system fonts are used.
 - **Phone.** Everything above works on the phone too, including the animations.
+
+</details>
+
+<p align="center"><img src="docs/images/divider.webp" alt="" width="600"></p>
 
 ## Fan project
 
