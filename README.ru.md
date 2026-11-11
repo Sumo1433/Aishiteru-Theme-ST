@@ -22,7 +22,7 @@
 
 <p align="center">
 
-![Chat on PC](docs/images/pc-chat.webp)
+<img src="docs/images/pc-chat.webp" alt="Chat on PC" width="100%">
 
 </p>
 
@@ -31,7 +31,7 @@
 
 <p align="center">
 
-![Reasoning](docs/images/reasoning.webp)
+<img src="docs/images/reasoning.webp" alt="Reasoning" width="100%">
 
 </p>
 
@@ -40,7 +40,7 @@
 
 <p align="center">
 
-![Recent chats](docs/images/recent.webp)
+<img src="docs/images/recent.webp" alt="Recent chats" width="100%">
 
 </p>
 
@@ -56,7 +56,7 @@
 
 <p align="center">
 
-![Pocket watch](docs/images/anim-dial.gif)
+<img src="docs/images/anim-dial.gif" alt="Pocket watch" width="160">
 
 </p>
 
@@ -68,7 +68,7 @@
 
 <p align="center">
 
-![Phone](docs/images/phone-chat.webp)
+<img src="docs/images/phone-chat.webp" alt="Phone" width="360">
 
 </p>
 

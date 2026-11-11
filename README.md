@@ -22,7 +22,7 @@ Message frames with shadow hands at the corners. Avatars get frames with hands t
 
 <p align="center">
 
-![Chat on PC](docs/images/pc-chat.webp)
+<img src="docs/images/pc-chat.webp" alt="Chat on PC" width="100%">
 
 </p>
 
@@ -31,7 +31,7 @@ The reasoning block looks like a page from the Gospel: silver and gold clasps at
 
 <p align="center">
 
-![Reasoning](docs/images/reasoning.webp)
+<img src="docs/images/reasoning.webp" alt="Reasoning" width="100%">
 
 </p>
 
@@ -40,7 +40,7 @@ On the welcome screen your recent chats show up as framed cards.
 
 <p align="center">
 
-![Recent chats](docs/images/recent.webp)
+<img src="docs/images/recent.webp" alt="Recent chats" width="100%">
 
 </p>
 
@@ -56,7 +56,7 @@ The swipe counter is a pocket watch. On every swipe the hand spins counter-clock
 
 <p align="center">
 
-![Pocket watch](docs/images/anim-dial.gif)
+<img src="docs/images/anim-dial.gif" alt="Pocket watch" width="160">
 
 </p>
 
@@ -68,7 +68,7 @@ The phone has its own layout. The input row is compact. When extensions add a lo
 
 <p align="center">
 
-![Phone](docs/images/phone-chat.webp)
+<img src="docs/images/phone-chat.webp" alt="Phone" width="360">
 
 </p>
 
