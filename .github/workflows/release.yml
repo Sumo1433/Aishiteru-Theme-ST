@@ -1,0 +1,31 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build archive
+        run: |
+          git archive --format=zip --prefix=Aishiteru-Theme-ST/ \
+            -o "Aishiteru-Theme-ST-${GITHUB_REF_NAME}.zip" HEAD \
+            manifest.json index.js style.css frames.css icons.css motion.css \
+            theme assets LICENSE README.md README.ru.md
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            "Aishiteru-Theme-ST-${GITHUB_REF_NAME}.zip" \
+            --title "Aishiteru Theme ${GITHUB_REF_NAME}" \
+            --notes-file .github/release-notes.md
